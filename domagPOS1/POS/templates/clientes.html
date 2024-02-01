@@ -1,0 +1,64 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'AddCliente' %}" ><button type="submit" class="agregar_cliente">Agregar Cliente</button></a>
+
+<div class="box_tabla">
+    <div class="botones_clientes">
+        <div class="control_clientes">
+            <button type="button" class="control_btn_clientes">CSV</button>
+            <button type="button" class="control_btn_clientes">Imprimir</button>
+        </div>
+        <div class="control">
+            <label>Buscar</label>
+            <input type="text">
+        </div>
+    </div>   
+    <table class="tabla_clientes">
+        <thead>
+            <tr>
+                <th>Razon</th>
+                <th>RFC</th>
+                <th>Credito</th>
+                <th>Limite de credito</th>
+                <th>Dias de credito</th>
+                <th>L. Precios</th>
+                <th>Nombre Comercial</th>
+                <th>Colonia</th>
+                <th>Calle</th>
+                <th>No. Exterior</th>
+                <th>No. Interior</th>
+                <th>Telefono</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in clientes %}
+            <tr>
+                <td>{{i.razon}}</td>
+                <td>{{i.rfc}}</td>
+                <td>{{i.credito}}</td>
+                <td>{{i.limite_credito}}</td>
+                <td>{{i.dias_credito}}</td>
+                <td>{{i.lista_precios}}</td>
+                <td>{{i.nombre_comercial}}</td>
+                <td>{{i.dirColonia}}</td>
+                <td>{{i.dircalle}}</td>
+                <td>{{i.dirnumext}}</td>
+                <td>{{i.dirnumint}}</td>
+                <td>{{i.telefono}}</td>
+                <td>
+                    <button type="button", onclick="editarPersonal", class="uno">Editar</button>
+                    <a href="{% url 'DeleteCliente' i.id  %}"><button type="button" class="dos">Eliminar</button></a>
+                </td>
+            </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
+</div>      
+
+{% endblock content %} 

@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>DOMAG {% block title %}{{title}}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="website icon" type="png" href="{% static 'image/logo4.png' %}">
+</head>
+
+<body>
+    <header class="head">
+        <!--Logotipo y nombre-->
+        <div class="logo">
+            <img src="{% static 'image/domag_dark.png' %}" alt="">
+            <h1>{{title}}</h1>
+        </div>
+
+        <div class="btn">
+            <ul>
+                {% if user.email %}
+                    <li><a href="{% url 'modulos' %}" >{{request.user.first_name}} {{user.last_name}}</a></li>
+                    <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    <li><a href="{% url 'login' %}">Iniciar Session</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+
+    <div id="content1">
+        <div class="box">
+            {% block content %}
+            <!--Contenido del Login-->
+            {% endblock content %}
+        </div>
+    </div>
+
+<footer>
+    Sistemas Domag &copy; | Empresa - {% now "d/m/Y" %}
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

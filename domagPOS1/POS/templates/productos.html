@@ -1,0 +1,47 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+<a href="{% url 'AddProducto' %}" ><button type="button" class="agregar_producto">Agregar Producto</button></a>
+
+<div class="box_tabla">
+    <div class="botones_venta">
+        <div class="control_venta">
+            <button type="button" class="control_btn_clientes">CSV</button>
+            <button type="button" class="control_btn_venta">Imprimir</button>
+        </div>
+        <div class="control_venta">
+            <label>Buscar</label>
+            <input type="text">
+        </div>
+    </div>   
+<table class="tabla_ventas">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Descripcion</th>
+            <th>Costo Factura</th>
+            <th>Costo Integrado</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for i in productos %}
+        <tr>
+            <td>{{i.codigo}}</td>
+            <td>{{i.description}}</td>
+            <td>{{i.Cto_Factura}}</td>
+            <td>{{i.Cto_Integrado}}</td>
+            <td>
+                <button type="button", onclick="editarPersonal", class="uno">Editar</button>
+                <a href="{% url 'DeleteProducto' i.id %}"><button type="button" class="dos">Eliminar</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>      
+ 
+{% endblock content %} 

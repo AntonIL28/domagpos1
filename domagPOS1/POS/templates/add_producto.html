@@ -1,0 +1,16 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+<form action="{% url 'AddProducto' %}" method="POST" class='layout_form'>
+    
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <input type="submit" value="Guardar" />
+
+</form>
+
+{% endblock content %}

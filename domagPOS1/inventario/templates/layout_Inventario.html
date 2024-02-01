@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>{% block title %}{{title}}{% endblock title %} |Domag</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="website icon" type="png" href="{% static 'image/logo4.png' %}">
+</head>
+
+<body>
+    <header class="head">
+        <!--Logotipo y nombre-->
+        <div class="logo">
+            <img src="{% static 'image/logo4.png' %}" alt="">
+            <h1>{{title}} | Domag</h1>
+        </div>
+
+        <div class="btn">
+            <ul>
+                {% if user.email %}
+                    <li><a href="{% url 'modulos' %}" >{{request.user.first_name}} {{user.last_name}}</a></li>
+                    <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    <li><a href="{% url 'login' %}">Iniciar Sesion</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+
+    <div id="content1">
+        <nav>
+            <ul>
+                <li><a href="{% url 'category' %}">Inicio</a>
+                <li><a href="#">Catálogos</a>
+                    <ul>
+                        <li><a href="#">Abrasivos</a></li>
+                        <li><a href="#">Adhesivos</a></li>
+                        <li><a href="#">Unidades</a></li>
+                        <li><a href="#">Lavado de autos</a></li>
+                        <li><a href="#">Revestimientos</a></li>
+                        <li><a href="#">Detallado</a></li>
+                        <li><a href="#">Masking</a></li>
+                        <li><a href="#">Painting</a></li>
+                        <li><a href="#">Equipo de proteccion</a></li>
+                        <li><a href="#">Tornillos y sujetadores</a></li>
+                        <li><a href="#">Herramientas</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Datos</a></li>
+                <li><a href="#">Reportes</a></li>
+                <li><a href="#">Utilerías</a></li>
+                <li><a href="#">Agregar Productos</a></li>
+            </ul>
+        </nav>
+        
+        <div class="box">
+            {% block content %}
+            <!--Contenido del Login-->
+            {% endblock content %}
+        </div>
+    </div>
+
+<footer>
+    Sistemas Domag &copy; | Empresa - {% now "d/m/Y" %}
+</footer>
+
+</body>
+</html>

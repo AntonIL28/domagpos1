@@ -1,0 +1,22 @@
+{% extends "layout_Inventario.html" %}
+{% load static %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+    {% for categorie in category %}
+        <div class="seccion">
+            {% if categorie.image != 'null' and categorie.image.url|length >= 1 %}
+                <div>
+                    <img src="{{categorie.image.url}}"/>
+                </div>
+            {% endif %}
+
+            <div class="seccion_pie">
+                <h3>{{categorie.name}}</h3>
+            </div>
+
+            <div class="text-center"><a href="{% url 'productbycat' categorie.id %}">Ver Listado de Productos</a></div>
+        </div>
+    {% endfor %}
+{% endblock content %}

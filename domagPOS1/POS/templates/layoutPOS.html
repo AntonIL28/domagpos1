@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--General-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>{% block title %}{{title}}{% endblock title %} |Domag</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--Icono de la pagina-->
+    <link rel="website icon" type="png" href="{% static 'image/logo4.png' %}">
+    <!--Iconos de la pagina-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class="head">
+        <!--Logotipo y nombre-->
+        <div class="logo">
+            <img src="{% static 'image/logo4.png' %}" alt="">
+            <h1>{{title}} | Domag</h1>
+        </div>
+
+        <div class="btn">
+            <ul>
+                {% if user.email %}
+                    <li><a href="{% url 'modulos' %}" >{{request.user.first_name}} {{user.last_name}}</a></li>
+                    <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    <li><a href="{% url 'login' %}">Iniciar Session</a></li>
+                {% endif %} 
+            </ul>
+        </div>
+    </header>
+
+    <div id="content1">
+        <nav>
+            <ul>
+                <li><a href="{% url 'Punto Venta'%}">Punto de Venta</a></li>
+                <li><a href="{% url 'Productos'%}">Productos</a></li>
+                <li><a href="{% url 'Clientes'%}">Clientes</a></li>
+                <li><a href="#">Factura</a></li>
+            </ul>
+        </nav>
+        
+        <div class="box">
+            {% block content %}
+            <!--Contenido del Login-->
+            {% endblock content %}
+        </div>
+    </div>
+<footer>
+    Sistemas Domag &copy; | Empresa - {% now "d/m/Y" %}
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</body>
+</html>

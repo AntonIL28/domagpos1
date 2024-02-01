@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+{% if user.email %}
+
+<div class="form_justify">
+    <h1>Bienvenido, {{request.user.first_name}} {{user.last_name}}</h1>
+</div>
+
+<div class="id_galeria">
+    <div class="galeria">
+        <div class="foto">
+            <a href="{% url 'Punto Venta' %}"><img src="static/image/Main_Pos_G.png" alt=""></a>
+        </div>
+        <div class="pie">
+            <a href="{% url 'Punto Venta' %}"><h2>Punto de Venta</h2></a>
+        </div>
+    </div>
+
+    <div class="galeria">
+        <div class="foto">
+            <a href="{% url 'CxC' %}"><img src="static/image/Main_CxC_G.png" alt=""></a>
+        </div>
+        <div class="pie">
+            <a href="{% url 'CxC' %}"><h2>Credito y Cobranza</h2></a>
+        </div>
+    </div>
+
+    <div class="galeria">
+        <div class="foto">
+            <a href="{% url 'category' %}"><img src="static/image/Main_Inventarios_G.png" alt=""></a>
+        </div>
+        <div class="pie">
+            <a href="{% url 'category' %}"><h2>Inventarios</h2></a>
+        </div>
+    </div>
+
+    <div class="galeria">
+        <div class="foto">
+            <img src="static/image/Main_Gerencia_G.png" alt="">
+        </div>
+        <div class="pie">
+            <h2>Gerencia</h2>
+        </div>
+    </div>
+
+
+    <div class="galeria">
+        <div class="foto">
+            <img src="static/image/Main_Reportes_G.png" alt="">
+        </div>
+        <div class="pie">
+            <h2>Reportes</h2>
+        </div>
+    </div>
+
+    <div class="galeria">
+        <div class="foto">
+            <img src="static/image/Main_Config_G.png" alt="">
+        </div>
+        <div class="pie">
+            <h2>Configuración</h2>
+        </div>
+    </div>
+</div>
+{% else %}
+<h1>Identificate para mas contenido</h1>
+{% endif %}
+
+{% endblock content %}
+
+
+
