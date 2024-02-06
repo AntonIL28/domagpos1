@@ -15,7 +15,6 @@ urlpatterns = [
     path('buscar/', views.buscar_cliente, name='buscar'),
     path('buscar_p/', views.buscar_producto, name='buscar_p'),
     path('seleccionar_elemento/<int:id>/', views.seleccionar, name='seleccionar_elemento'),
-    path('add_venta/',views.add_ventas.as_view(), name='AddVenta'),
     #path('export/', views.export_pdf_view, name="ExportPDF" ),
     #path('export/<id>/<iva>', views.export_pdf_view, name="ExportPDF" ),
 ]
