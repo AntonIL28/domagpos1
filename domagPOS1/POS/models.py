@@ -1,16 +1,4 @@
 from django.db import models
-
-class Category(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nombre')
-    description = models.CharField(max_length=255, verbose_name='Descripcion')
-    created_at = models. DateTimeField(auto_now_add=True, verbose_name='Creado el')
-    image = models.ImageField(default='null', verbose_name='Imagen', upload_to="categories")
-    class Meta:
-        verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
-
-    def __str__(self):
-        return self.name
     
 class Almacen(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
@@ -34,7 +22,7 @@ class Article(models.Model):
     lista_precios = models.IntegerField(default=0)
     porcentaje_iva = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     iva = models.DecimalField(max_digits=15, decimal_places=2)
-    id_Categoria = models.ForeignKey(Category, on_delete=models.CASCADE)
+    id_Categoria = models.ForeignKey(Almacen, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 

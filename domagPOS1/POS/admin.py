@@ -29,13 +29,6 @@ class ArticuloAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticuloAdmin) 
 
-
-class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ['name']
-    readonly_fields = ['created_at']
-
-admin.site.register(Category, CategoryAdmin)
-
 class VentaAdmin(admin.ModelAdmin):
     readonly_fields = ()
 
