@@ -1,6 +1,6 @@
 from django.contrib import admin
 from main.models import Cliente, Productos
-from POS.models import Article, Category
+from POS.models import *
 # Register your models here.
 
 class ClienteAdmin(admin.ModelAdmin):
@@ -34,5 +34,20 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
     readonly_fields = ['created_at']
 
-admin.site.register(Category, CategoryAdmin) 
+admin.site.register(Category, CategoryAdmin)
+
+class VentaAdmin(admin.ModelAdmin):
+    readonly_fields = ()
+
+admin.site.register(Venta, VentaAdmin)
+
+class AlmacenAdmin(admin.ModelAdmin):
+    readonly_fields = ()
+
+admin.site.register(Almacen, AlmacenAdmin)
+
+class ExistenciaAdmin(admin.ModelAdmin):
+    readonly_fields = ()
+
+admin.site.register(Existencia, ExistenciaAdmin) 
 
