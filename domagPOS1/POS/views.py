@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from main.models import Cliente, Productos
 from main.forms import AddCliente, AddProducto
-from POS.models import Article, Egreso, ProductosEgreso, Category, Stock
+from POS.models import Article, Category
 from django.http import JsonResponse
 from django.db.models import Q
 from django.views.generic import ListView

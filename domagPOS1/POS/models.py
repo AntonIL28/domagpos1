@@ -11,6 +11,18 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Almacen(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nombre')
+    description = models.CharField(max_length=255, verbose_name='Descripcion')
+    created_at = models. DateTimeField(auto_now_add=True, verbose_name='Creado el')
+    image = models.ImageField(default='null', verbose_name='Imagen', upload_to="categories")
+    class Meta:
+        verbose_name = 'Almace'
+        verbose_name_plural = 'Almacenes'
+
+    def __str__(self):
+        return self.name
 
 class Article(models.Model):
     codigo = models.CharField(max_length=200, unique=True, null=False)
@@ -33,8 +45,9 @@ class Article(models.Model):
     def __str__(self):
         return self.description
     
-class Stock(models.Model):
+class Existencia(models.Model):
     id_Producto = models.ForeignKey(Article, on_delete=models.CASCADE)
+    id_almacen = models.ForeignKey(Almacen, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
 
     class Meta:
@@ -66,29 +79,11 @@ class Clientes(models.Model):
     def __str__(self):
         return self.razon
 
-class Egreso(models.Model):
-    fecha_pedido = models.DateField(max_length=255)
-    cliente = models.ForeignKey(Clientes, on_delete=models.SET_NULL , null=True , related_name='clientee')
-    total = models.DecimalField(max_digits=20, decimal_places=2, default=0)
-    pagado = models.DecimalField(max_digits=20, decimal_places=2, default=0)
-    comentarios = models.TextField(blank=True, null=True)
-    created = models.DateTimeField(auto_now=True)
-    ticket = models.BooleanField(default=True)
-    desglosar = models.BooleanField(default=True)
-    updated = models.DateTimeField(auto_now_add=True , null=True)
 
-    class Meta:
-        verbose_name='egreso'
-        verbose_name_plural = 'egresos'
-        order_with_respect_to = 'fecha_pedido'
-    
-    def __str__(self):
-        return str(self.id)
-
-class ProductosEgreso(models.Model):
-    egreso = models.ForeignKey(Egreso, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Article, on_delete=models.CASCADE)
-    cantidad = models.DecimalField(max_digits=20, decimal_places=2 , null=False)
+class Venta(models.Model):
+    codigo = models.CharField(max_length=200, unique=True, null=False)
+    articulo = models.ForeignKey(Article, on_delete=models.CASCADE)
+    cantidad = models.ForeignKey(Existencia, on_delete=models.CASCADE)
     precio = models.DecimalField(max_digits=20, decimal_places=2 , null=False , default=0)
     subtotal = models.DecimalField(max_digits=20, decimal_places=2 , null=False , default=0)
     iva = models.DecimalField(max_digits=20, decimal_places=2 , null=False , default=0)
@@ -96,3 +91,10 @@ class ProductosEgreso(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     entregado = models.BooleanField(default=True)
     devolucion = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Venta'
+        verbose_name_plural = 'Ventas'
+
+    def __str__(self):
+        return self.codigo

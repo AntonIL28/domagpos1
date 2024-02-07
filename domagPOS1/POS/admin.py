@@ -1,6 +1,6 @@
 from django.contrib import admin
 from main.models import Cliente, Productos
-from POS.models import Article, Stock, Category
+from POS.models import Article, Category
 # Register your models here.
 
 class ClienteAdmin(admin.ModelAdmin):
@@ -29,10 +29,6 @@ class ArticuloAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticuloAdmin) 
 
-class StockAdmin(admin.ModelAdmin):
-    readonly_fields = ()
-
-admin.site.register(Stock, StockAdmin) 
 
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
