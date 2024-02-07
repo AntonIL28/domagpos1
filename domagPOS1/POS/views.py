@@ -183,3 +183,6 @@ def buscar_producto(request):
 def seleccionar(request, id):
     elemento_seleccionado = Article.objects.get(pk=id)
     return render(request, 'POS.html', {'elemento_seleccionado': elemento_seleccionado})
+
+def venta(request):
+    return render(request, 'venta.html')
