@@ -51,8 +51,8 @@ class Existencia(models.Model):
     cantidad = models.IntegerField()
 
     class Meta:
-        verbose_name = 'Inventario'
-        verbose_name_plural = 'Inventarios'
+        verbose_name = 'Existencia'
+        verbose_name_plural = 'Existencias'
 
 class Clientes(models.Model):
     razon = models.CharField(max_length=200, null=False)
