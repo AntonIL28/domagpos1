@@ -62,7 +62,7 @@ class Productos(models.Model):
     Cto_Unidad_Compras = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Cto_Factura = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Porc_GastosVarios = models.CharField(max_length=200, unique=True, null=False)
-    Porc_impuestos = models.CharField(max_length=200, unique=True, null=False)
+    Porc_impuestos = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Cto_Integrado = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)

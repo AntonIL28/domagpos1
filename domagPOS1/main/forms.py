@@ -93,7 +93,7 @@ class AddProducto(forms.Form):
     Porc_GastosVarios = forms. CharField(
         label="Porcentaje de Gastos Varios"
     )
-    Porc_impuestos = forms. CharField(
+    Porc_impuestos = forms. FloatField(
         label="Porcentaje Impuesto"
     )
     Cto_Integrado = forms. FloatField(
