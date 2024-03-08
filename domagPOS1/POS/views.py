@@ -50,7 +50,7 @@ def add_producto_view(request):
             Unidad_Inv = data_form['Unidad_Inv']
             cantidad_Unidad_Compras = data_form['cantidad_Unidad_Compras']
             Cto_Unidad_Compras = data_form['Cto_Unidad_Compras']
-            Cto_Factura = Cto_Unidad_Compras/cantidad_Unidad_Compras
+            Cto_Factura = cantidad_Unidad_Compras/Cto_Unidad_Compras
             Porc_GastosVarios = data_form['Porc_GastosVarios']
             Porc_impuestos = ((data_form['Porc_impuestos']/100)+1)
             Cto_Integrado = Porc_impuestos*Cto_Factura
