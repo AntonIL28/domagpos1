@@ -628,3 +628,9 @@ footer{
     margin-right: 20px;
     margin-left: 20px;
 }*/ /*En pausa*/
+
+#resultado{
+    width: 500px;
+    height: 500px;
+    background: red;
+}
