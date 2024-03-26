@@ -13,7 +13,7 @@ def POS(request):
     articulo = Article.objects.all()
     clientes = Cliente.objects.all()
 
-    return render(request, 'POS.html', {
+    return render(request, 'POScopy.html', {
         'title':'Punto de Venta',
         'clientes': clientes,
         'articulo': articulo,

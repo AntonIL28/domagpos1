@@ -3,7 +3,8 @@ from . import views
 from .views import get_data
 
 urlpatterns = [
-    path('punto-venta/', views.POS, name="Punto Venta"),
+    #path('punto-venta/', views.POS, name="Punto Venta"),
+    path('punto-venta2/', views.POS, name="POS2"),
     path('clientes/', views.clientes_view, name="Clientes"),
     path('add_cliente/', views.add_cliente_view, name="AddCliente"),
     path('edit_cliente/', views.edit_cliente_view, name="EditCliente"),
