@@ -69,8 +69,8 @@ class AddCliente(forms.Form):
 class AddProducto(forms.ModelForm):
     class Meta:
         model = Productos
-        fields = ['codigo',
-                'description',
+        fields = ['description',
+                  'codigo',
                 'Unidad_Compras',
                 'Unidad_Ventas',
                 'Unidad_Inv',
@@ -78,3 +78,15 @@ class AddProducto(forms.ModelForm):
                 'Cto_Unidad_Compras',
                 'Porc_GastosVarios',
                 'Porc_impuestos']
+        
+        labels={
+                'codigo':'Codigo',
+                'description':'Descripcion',
+                'Unidad_Compras':'Unidad Compra',
+                'Unidad_Ventas': 'Unidad Venta',
+                'Unidad_Inv':'Inventario',
+                'cantidad_Unidad_Compras':'Unidades',
+                'Cto_Unidad_Compras':'Costo Unitario',
+                'Porc_GastosVarios':'Porc. Gastos Varios',
+                'Porc_impuestos':'Porc. Impuesto'
+        }

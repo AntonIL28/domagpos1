@@ -634,3 +634,23 @@ footer{
     height: 500px;
     background: red;
 }
+
+#content_form_addproductos{
+    display: grid;
+    place-items: center;
+}
+
+#form_addproductos{
+    width: 38%;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-gap: 16px;
+}
+
+label{
+    grid-column: 1;
+}
+
+input, textarea{
+    grid-column: 2;
+}

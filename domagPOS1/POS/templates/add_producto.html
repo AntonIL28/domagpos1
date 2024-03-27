@@ -3,14 +3,16 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
-<form action="{% url 'AddProducto' %}" method="POST" class='layout_form'>
+<div id="content_form_addproductos">
+    <form action="{% url 'AddProducto' %}" method="POST" id="form_addproductos">
 
-    {% csrf_token %}
-    
-    {{form.as_p}}
+        {% csrf_token %}
+        
+        {{form.as_table}}
 
-    <input type="submit" value="Guardar" />
+        <input type="submit" value="Guardar" />
 
-</form>
+    </form>
+</div>
 
 {% endblock content %}
