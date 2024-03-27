@@ -2,6 +2,7 @@ from django import forms
 from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from main.models import Productos
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -65,38 +66,15 @@ class AddCliente(forms.Form):
         label= "Telefono"
     )
 
-class AddProducto(forms.Form):
-    codigo = forms.CharField(
-        label = "Codigo"
-    )
-    description = forms.CharField(
-        label = "Descripcion"
-    )
-    Unidad_Compras = forms. IntegerField(
-        label= "Unidad Compras"
-    )
-    Unidad_Ventas = forms. IntegerField(
-        label= "Unidad Ventas"
-    )
-    Unidad_Inv = forms. IntegerField(
-        label= "Unidad Inventario"
-    )
-    cantidad_Unidad_Compras= forms. IntegerField(
-        label="Cantidad Compras"
-    )
-    Cto_Unidad_Compras = forms. FloatField(
-        label="Costo Unitario"
-    )
-    Cto_Factura = forms. FloatField(
-        label="Costo Factura"
-    )
-    Porc_GastosVarios = forms. CharField(
-        label="Porcentaje de Gastos Varios"
-    )
-    Porc_impuestos = forms. FloatField(
-        label="Porcentaje Impuesto"
-    )
-    Cto_Integrado = forms. FloatField(
-        label="Costo Integrado"
-    )
-    
+class AddProducto(forms.ModelForm):
+    class Meta:
+        model = Productos
+        fields = ['codigo',
+                'description',
+                'Unidad_Compras',
+                'Unidad_Ventas',
+                'Unidad_Inv',
+                'cantidad_Unidad_Compras',
+                'Cto_Unidad_Compras',
+                'Porc_GastosVarios',
+                'Porc_impuestos']

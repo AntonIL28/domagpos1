@@ -67,6 +67,12 @@ class Productos(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        self.Porc_impuestos = ((self.Porc_impuestos/100)+1)
+        self.Cto_Factura = self.Cto_Unidad_Compras/self.cantidad_Unidad_Compras
+        self.Cto_Integrado = self.Porc_impuestos * self.Cto_Factura
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
