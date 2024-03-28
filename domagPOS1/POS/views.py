@@ -37,14 +37,41 @@ def productos_view(request):
 
 def add_producto_view(request):
 
+    context={}
+
     if request.method == 'POST':
-        form = AddProducto(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('Productos')  # Reemplaza con la ruta correcta
-    else:
-        form = AddProducto()
-    return render(request, 'add_producto.html', {'form': form})
+
+        estado=False
+
+        description = request.POST['description']
+        codigo = request.POST['codigo']
+        Unidad_Compras = request.POST['Unidad_Compras']
+        Unidad_Ventas = request.POST['Unidad_Ventas']
+        Unidad_Inv = request.POST['Unidad_Inv']
+        cantidad_Unidad_Compras = int(request.POST['cantidad_Unidad_Compras'])
+        Cto_Unidad_Compras = int(request.POST['Cto_Unidad_Compras'])
+        Porc_GastosVarios = request.POST['Porc_GastosVarios']
+        Porc_impuestos = int(request.POST['Porc_impuestos'])
+
+        producto = Productos(
+            description = description,
+            codigo = codigo,
+            Unidad_Compras = Unidad_Compras,
+            Unidad_Ventas = Unidad_Ventas,
+            Unidad_Inv = Unidad_Inv,
+            cantidad_Unidad_Compras = cantidad_Unidad_Compras,
+            Cto_Unidad_Compras = Cto_Unidad_Compras,
+            Porc_GastosVarios = Porc_GastosVarios,
+            Porc_impuestos = Porc_impuestos
+        )
+
+        producto.save()
+        estado=True
+
+        context = {'estado':estado}
+        return redirect('Productos')
+
+    return render(request, 'add_producto.html', context)
 
 
 def edit_producto_view(request):

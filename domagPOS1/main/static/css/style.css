@@ -636,21 +636,41 @@ footer{
 }
 
 #content_form_addproductos{
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrapper{
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
-#form_addproductos{
-    width: 38%;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-gap: 16px;
+
+.head_addp{
+    grid-column: 1/5;
+    grid-row: 1;
 }
 
-label{
-    grid-column: 1;
+.body_addp{
+    grid-column: 1/3;
+    grid-row: 2;
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-input, textarea{
-    grid-column: 2;
+.footer_addp{
+    grid-column: 3/5;
+    grid-row: 2;
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.title_add{
+    background: #1f1e1b;
+    width: 120px;
 }

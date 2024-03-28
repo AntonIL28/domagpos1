@@ -4,15 +4,60 @@
 
 {% block content %}
 <div id="content_form_addproductos">
-    <form action="{% url 'AddProducto' %}" method="POST" id="form_addproductos">
+        <form method="POST" action="{% url 'AddProducto' %}"  class="wrapper">
 
-        {% csrf_token %}
-        
-        {{form.as_table}}
+            {% csrf_token %}
+            <section class="head_addp">
+                <label for="description">Descripcion:</label>
+                <input type="text" name="description">
 
-        <input type="submit" value="Guardar" />
+                <label for="codigo">Codigo</label>
+                <input type="text" name="codigo">
+            </section>
 
-    </form>
+            <section class="body_addp">
+                <h1 class="title_add">Compras</h1>
+                <label for="Unidad_Compras">Unidad Compra</label>
+                <select type="text" name="Unidad_Compras">
+                    <option value="value1">Pieza</option>
+                    <option value="value3">Paquete</option>
+                    <option value="value2">Galon</option>
+                    <option value="value2">Litro</option>
+                  </select>
+                <br>
+
+                <label for="Unidad_Ventas">Unidad Venta</label>
+                <select type="text" name="Unidad_Ventas">
+                    <option value="value1">Pieza</option>
+                    <option value="value3">Paquete</option>
+                    <option value="value2">Galon</option>
+                    <option value="value2">Litro</option>
+                  </select>
+                <br>
+
+                <label for="Unidad_Inv">Inventario</label>
+                <input type="text" name="Unidad_Inv">
+
+                <label for="cantidad_Unidad_Compras">Unidades</label>
+                <input type="text" name="cantidad_Unidad_Compras">
+            </section>
+
+            <section class="footer_addp">
+                <h1 class="title_add">Costos</h1>
+                <label for="Cto_Unidad_Compras">Costo Unitario</label>
+                <input type="text" name="Cto_Unidad_Compras">
+
+                <label for="Porc_GastosVarios">Porc. Gastos Varios</label>
+                <input type="text" name="Porc_GastosVarios">
+
+                <label for="Porc_impuestos">Porc. Impuesto</label>
+                <input type="number" name="Porc_impuestos">
+            
+
+                <input type="submit" value="Guardar" />
+            </section>
+
+        </form>
 </div>
 
 {% endblock content %}

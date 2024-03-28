@@ -55,8 +55,8 @@ class Productos(models.Model):
     codigo = models.CharField(max_length=200, unique=True, null=False)
     description = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to='productos', null=True, blank=True) #original
-    Unidad_Compras = models.IntegerField(default=0)
-    Unidad_Ventas = models.IntegerField(default=0)
+    Unidad_Compras = models.CharField(max_length=200, unique=True, null=False)
+    Unidad_Ventas = models.CharField(max_length=200, unique=True, null=False)
     Unidad_Inv = models.IntegerField(default=0)
     cantidad_Unidad_Compras = models.IntegerField(default=0)
     Cto_Unidad_Compras = models.DecimalField(max_digits=15, decimal_places=4, null=False)
