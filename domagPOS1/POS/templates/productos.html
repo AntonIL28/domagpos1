@@ -19,6 +19,7 @@
 <table class="tabla_ventas">
     <thead>
         <tr>
+            <th>Id Producto</th>
             <th>Código</th>
             <th>Descripcion</th>
             <th>Costo Factura</th>
@@ -28,16 +29,15 @@
     </thead>
 
     <tbody>
-        {% for i in productos %}
-        <tr>
-            <td>{{i.codigo}}</td>
-            <td>{{i.description}}</td>
-            <td>{{i.Cto_Factura}}</td>
-            <td>{{i.Cto_Integrado}}</td>
-            <td>
-                <button type="button", onclick="editarPersonal", class="uno">Editar</button>
-                <a href="{% url 'DeleteProducto' i.id %}"><button type="button" class="dos">Eliminar</button></a>
-            </td>
+        {% for producto in productos %}
+        <tr class="product_td">
+            <td>{{producto.id}}</td>
+            <td>{{producto.codigo}}</td>
+            <td >{{producto.description}}</td>
+            <td>{{producto.Cto_Factura}}</td>
+            <td>{{producto.Cto_Integrado}}</td>
+            <td><a href="{% url 'EditarProducto' producto.id %}">Editar</a></td>
+        
         </tr>
         {% endfor %}
     </tbody>

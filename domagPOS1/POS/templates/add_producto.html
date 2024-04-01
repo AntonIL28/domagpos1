@@ -4,13 +4,15 @@
 
 {% block content %}
 <div id="content_form_addproductos">
-        <form method="POST" action="{% url 'AddProducto' %}"  class="wrapper">
+        <form method="POST" action="{% url 'AddProducto' %}"  class="wrapper" id="add_producto_form">
 
             {% csrf_token %}
             <section class="head_addp">
                 <label for="description">Descripcion:</label>
                 <input type="text" name="description">
-
+            </section>
+                
+            <section class="codigo_add">
                 <label for="codigo">Codigo</label>
                 <input type="text" name="codigo">
             </section>
@@ -46,14 +48,16 @@
                 <h1 class="title_add">Costos</h1>
                 <label for="Cto_Unidad_Compras">Costo Unitario</label>
                 <input type="text" name="Cto_Unidad_Compras">
-
+                
                 <label for="Porc_GastosVarios">Porc. Gastos Varios</label>
                 <input type="text" name="Porc_GastosVarios">
-
+                
                 <label for="Porc_impuestos">Porc. Impuesto</label>
                 <input type="number" name="Porc_impuestos">
-            
-
+            </section>
+                
+            <section class="control_addp">
+                <a href="{% url 'Productos' %}">Regresar</a>
                 <input type="submit" value="Guardar" />
             </section>
 

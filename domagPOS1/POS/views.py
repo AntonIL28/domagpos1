@@ -181,3 +181,64 @@ def seleccionar(request, id):
 
 def venta(request):
     return render(request, 'venta.html')
+
+class FormularioAddProducto(HttpResponse):
+    def editar_producto(request, id):
+        productos = Productos.objects.filter(pk=id).first()
+
+        description = instance=productos
+        codigo = instance=productos
+        Unidad_Compras = instance=productos
+        Unidad_Ventas = instance=productos
+        Unidad_Inv = instance=productos
+        cantidad_Unidad_Compras = instance=productos
+        Cto_Unidad_Compras = instance=productos
+        Porc_GastosVarios = instance=productos
+        Porc_impuestos = instance=productos
+
+        return render(request, "editar.html", {
+            'productos':productos,
+
+            'description':description,
+            'codigo': codigo,
+            'Unidad_Compras': Unidad_Compras,
+            'Unidad_Ventas': Unidad_Ventas,
+            'Unidad_Inv': Unidad_Inv ,
+            'cantidad_Unidad_Compras': cantidad_Unidad_Compras,
+            'Cto_Unidad_Compras': Cto_Unidad_Compras,
+            'Porc_GastosVarios': Porc_GastosVarios,
+            'Porc_impuestos': Porc_impuestos})
+    
+
+    def actualizar_producto(request, id):
+        productos = Productos.objects.get(pk=id)
+
+        description = request.POST(productos)
+        codigo = request.POST(productos)
+        Unidad_Compras = request.POST(productos)
+        Unidad_Ventas = request.POST(productos)
+        Unidad_Inv = request.POST(productos)
+        cantidad_Unidad_Compras = request.POST(productos)
+        Cto_Unidad_Compras = request.POST(productos)
+        Porc_GastosVarios = request.POST(productos)
+        Porc_impuestos = request.POST(productos)
+
+        productos = Productos(
+            description = description,
+            codigo = codigo,
+            Unidad_Compras = Unidad_Compras,
+            Unidad_Ventas = Unidad_Ventas,
+            Unidad_Inv = Unidad_Inv,
+            cantidad_Unidad_Compras = cantidad_Unidad_Compras,
+            Cto_Unidad_Compras = Cto_Unidad_Compras,
+            Porc_GastosVarios = Porc_GastosVarios,
+            Porc_impuestos = Porc_impuestos
+        )
+
+        productos.save()
+
+        productos = Productos.objects.all()
+
+        return render(request, 'productos.html',{
+            'productos':productos,
+        })
