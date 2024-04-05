@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import FormularioAddProducto
 from .views import get_data
 
 urlpatterns = [
@@ -13,8 +12,8 @@ urlpatterns = [
     path('productos/', views.productos_view, name="Productos"),
     path('add_producto/', views.add_producto_view, name="AddProducto"),
     path('delete_producto/<int:id>', views.delete_producto_view, name="DeleteProducto"),
-    path('editar_producto/<int:id>', FormularioAddProducto.editar_producto, name="EditarProducto"),
-    path('actualizar_producto/<int:id>', FormularioAddProducto.actualizar_producto, name="ActualizarProducto"),
+    path('editar_producto/<int:id>', views.editar_producto, name="EditarProducto"),
+    path('actualizar_producto/<int:id>', views.actualizar_producto, name="ActualizarProducto"),
     path('get_data/', get_data, name='get_data'),
     path('buscar/', views.buscar_cliente, name='buscar'),
     path('buscar_p/', views.buscar_producto, name='buscar_p'),

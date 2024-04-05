@@ -47,18 +47,18 @@ def add_producto_view(request):
         codigo = request.POST['codigo']
         Unidad_Compras = request.POST['Unidad_Compras']
         Unidad_Ventas = request.POST['Unidad_Ventas']
-        Unidad_Inv = request.POST['Unidad_Inv']
-        cantidad_Unidad_Compras = int(request.POST['cantidad_Unidad_Compras'])
-        Cto_Unidad_Compras = int(request.POST['Cto_Unidad_Compras'])
+        Unidad_Inventario = request.POST['Unidad_Inventario']
+        cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
+        Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
         Porc_GastosVarios = request.POST['Porc_GastosVarios']
-        Porc_impuestos = int(request.POST['Porc_impuestos'])
+        Porc_impuestos = request.POST['Porc_impuestos']
 
         producto = Productos(
             description = description,
             codigo = codigo,
             Unidad_Compras = Unidad_Compras,
             Unidad_Ventas = Unidad_Ventas,
-            Unidad_Inv = Unidad_Inv,
+            Unidad_Inventario = Unidad_Inventario,
             cantidad_Unidad_Compras = cantidad_Unidad_Compras,
             Cto_Unidad_Compras = Cto_Unidad_Compras,
             Porc_GastosVarios = Porc_GastosVarios,
@@ -74,8 +74,7 @@ def add_producto_view(request):
     return render(request, 'add_producto.html', context)
 
 
-def edit_producto_view(request):
-    return redirect('Clientes')
+
 
 def delete_producto_view(request, id):
     articulo = Productos.objects.get(pk=id)
@@ -182,63 +181,29 @@ def seleccionar(request, id):
 def venta(request):
     return render(request, 'venta.html')
 
-class FormularioAddProducto(HttpResponse):
-    def editar_producto(request, id):
-        productos = Productos.objects.filter(pk=id).first()
 
-        description = instance=productos
-        codigo = instance=productos
-        Unidad_Compras = instance=productos
-        Unidad_Ventas = instance=productos
-        Unidad_Inv = instance=productos
-        cantidad_Unidad_Compras = instance=productos
-        Cto_Unidad_Compras = instance=productos
-        Porc_GastosVarios = instance=productos
-        Porc_impuestos = instance=productos
-
-        return render(request, "editar.html", {
-            'productos':productos,
-
-            'description':description,
-            'codigo': codigo,
-            'Unidad_Compras': Unidad_Compras,
-            'Unidad_Ventas': Unidad_Ventas,
-            'Unidad_Inv': Unidad_Inv ,
-            'cantidad_Unidad_Compras': cantidad_Unidad_Compras,
-            'Cto_Unidad_Compras': Cto_Unidad_Compras,
-            'Porc_GastosVarios': Porc_GastosVarios,
-            'Porc_impuestos': Porc_impuestos})
+def editar_producto(request, id):
+    if request.method == 'GET':
+        producto = Productos.objects.get(pk=id)
+        return render(request, 'editar.html', {'producto': producto})
+    return redirect('Productos')
     
 
-    def actualizar_producto(request, id):
-        productos = Productos.objects.get(pk=id)
+def actualizar_producto(request, id):
+    if request.method == 'POST':
+        producto = Productos.objects.get(pk=id)
+        
+        producto.description = request.POST['description']
+        producto.codigo = request.POST['codigo']
+        producto.Unidad_Compras = request.POST['Unidad_Compras']
+        producto.Unidad_Ventas = request.POST['Unidad_Ventas']
+        producto.Unidad_Inventario = request.POST['Unidad_Inventario']
+        producto.cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
+        producto.Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
+        producto.Porc_GastosVarios = request.POST['Porc_GastosVarios']
+        producto.Porc_impuestos = request.POST['Porc_impuestos']
 
-        description = request.POST(productos)
-        codigo = request.POST(productos)
-        Unidad_Compras = request.POST(productos)
-        Unidad_Ventas = request.POST(productos)
-        Unidad_Inv = request.POST(productos)
-        cantidad_Unidad_Compras = request.POST(productos)
-        Cto_Unidad_Compras = request.POST(productos)
-        Porc_GastosVarios = request.POST(productos)
-        Porc_impuestos = request.POST(productos)
-
-        productos = Productos(
-            description = description,
-            codigo = codigo,
-            Unidad_Compras = Unidad_Compras,
-            Unidad_Ventas = Unidad_Ventas,
-            Unidad_Inv = Unidad_Inv,
-            cantidad_Unidad_Compras = cantidad_Unidad_Compras,
-            Cto_Unidad_Compras = Cto_Unidad_Compras,
-            Porc_GastosVarios = Porc_GastosVarios,
-            Porc_impuestos = Porc_impuestos
-        )
-
-        productos.save()
-
-        productos = Productos.objects.all()
-
-        return render(request, 'productos.html',{
-            'productos':productos,
-        })
+        producto.save()
+       
+        return redirect('Productos')
+        

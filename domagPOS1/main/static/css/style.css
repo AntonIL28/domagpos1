@@ -680,6 +680,7 @@ footer{
     margin-top: 10px;
 }
 
+
 .title_add{
     background: #1f1e1b;
     width: 120px;
@@ -688,5 +689,21 @@ footer{
 .product_td:hover{
     cursor:pointer;
     background: #7c7c7c;
+    transition: 300ms all;
+}
+
+.delete_producto_button{
+    padding: 10px;
+    margin-top: 10px;
+    background: red;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.delete_producto_button:hover{
+    cursor:pointer;
+    color: #fff;
+    background: red;
     transition: 300ms all;
 }

@@ -55,22 +55,26 @@ class Productos(models.Model):
     codigo = models.CharField(max_length=200, unique=True, null=False)
     description = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to='productos', null=True, blank=True) #original
-    Unidad_Compras = models.CharField(max_length=200, unique=True, null=False)
-    Unidad_Ventas = models.CharField(max_length=200, unique=True, null=False)
-    Unidad_Inv = models.IntegerField(default=0)
+    Unidad_Compras = models.CharField(max_length=200, null=False, default="")
+    Unidad_Ventas = models.CharField(max_length=200, null=False, default="")
+    Unidad_Inventario = models.CharField(max_length=200, null=False, default="")
     cantidad_Unidad_Compras = models.IntegerField(default=0)
     Cto_Unidad_Compras = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Cto_Factura = models.DecimalField(max_digits=15, decimal_places=4, null=False)
-    Porc_GastosVarios = models.CharField(max_length=200, unique=True, null=False)
-    Porc_impuestos = models.DecimalField(max_digits=15, decimal_places=4, null=False)
+    Porc_GastosVarios = models.DecimalField(max_digits=15, decimal_places=2, null=False)
+    Porc_impuestos = models.DecimalField(max_digits=15, decimal_places=2, null=False)
     Cto_Integrado = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        self.Porc_impuestos = ((self.Porc_impuestos/100)+1)
-        self.Cto_Factura = self.Cto_Unidad_Compras/self.cantidad_Unidad_Compras
-        self.Cto_Integrado = self.Porc_impuestos * self.Cto_Factura
+        factor_gastosvarios = 1+(float(self.Porc_GastosVarios)/100)
+        factor_impuestos = 1+(float(self.Porc_impuestos)/100)
+        self.Cto_Factura = float(self.Cto_Unidad_Compras)/int(self.cantidad_Unidad_Compras)
+        ctoInt = float(self.Cto_Factura) * float(factor_gastosvarios)
+        ctoInt = ctoInt * factor_impuestos
+        
+        self.Cto_Integrado = ctoInt
         super().save(*args, **kwargs)
 
     class Meta:
