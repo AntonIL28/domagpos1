@@ -58,7 +58,7 @@ class Productos(models.Model):
     Unidad_Compras = models.CharField(max_length=200, null=False, default="")
     Unidad_Ventas = models.CharField(max_length=200, null=False, default="")
     Unidad_Inventario = models.CharField(max_length=200, null=False, default="")
-    cantidad_Unidad_Compras = models.IntegerField(default=0)
+    cantidad_Unidad_Compras = models.IntegerField(default=1)
     Cto_Unidad_Compras = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Cto_Factura = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Porc_GastosVarios = models.DecimalField(max_digits=15, decimal_places=2, null=False)

@@ -4,17 +4,17 @@
 
 {% block content %}
 <div id="content_form_addproductos">
-        <form method="POST" action="{% url 'AddProducto' %}"  class="wrapper" id="add_producto_form">
+        <form method="POST" action="{% url 'AddProducto' %}"  id="wrapper" id="add_producto_form">
 
             {% csrf_token %}
             <section class="head_addp">
-                <label for="description">Descripcion:</label>
-                <input type="text" name="description">
+                <label for="description">Descripcion</label>
+                <input type="text" id="description" name="description" required>
             </section>
                 
             <section class="codigo_add">
                 <label for="codigo">Codigo</label>
-                <input type="text" name="codigo">
+                <input type="text" name="codigo" required>
             </section>
 
             <section class="body_addp">
@@ -47,21 +47,33 @@
                 <br>
 
                 <label for="cantidad_Unidad_Compras">Unidades</label>
-                <input type="text" name="cantidad_Unidad_Compras">
+                <input type="text" class="cantidad_producto" id="cantidad_unidad" name="cantidad_Unidad_Compras">
             </section>
 
             <section class="footer_addp">
-                <h1 class="title_add">Costos</h1>
+                <h1 class="title_add">Impuestos</h1>
                 <label for="Cto_Unidad_Compras">Costo Unitario</label>
-                <input type="number" name="Cto_Unidad_Compras">
+                <input type="number" id="cto_unit" name="Cto_Unidad_Compras">
                 <br>
                 
                 <label for="Porc_GastosVarios">Porc. Gastos Varios</label>
-                <input type="number" name="Porc_GastosVarios">
+                <input type="number" id="gastos_varios" name="Porc_GastosVarios">
                 <br>
                 
                 <label for="Porc_impuestos">Porc. Impuesto</label>
-                <input type="number" name="Porc_impuestos">
+                <input type="number" id="impuesto" name="Porc_impuestos">
+                <br>
+            </section>
+            
+            
+            <section class="coste_addp">
+                <!--Arroja informacion-->
+                <h1 class="title_add">Costos</h1>
+                <label for="Cto_Factura">Costo Factura</label>
+                <input type="number" id="cto_fac" name="Cto_Factura" readonly>
+                <br>
+                <label for="Cto_Integrado">Costo Integrado</label>
+                <input type="number" id="cto_int" name="Cto_Integrado"  readonly>
                 <br>
             </section>
                 
@@ -72,5 +84,58 @@
 
         </form>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+
+    var wrapper =document.getElementById("wrapper")
+
+    var cto_unit = document.getElementById("cto_unit");
+    var cantidad = document.getElementById("cantidad_unidad");
+    var cto_fac = document.getElementById("cto_fac");
+
+    var cto_int = document.getElementById("cto_int")
+    var impuesto = document.getElementById("impuesto");
+    var gastos_varios = document.getElementById("gastos_varios");
+
+    wrapper.addEventListener("keypress", event =>{
+        if (event.keyCode === 13){
+            event.preventDefault();
+        }
+    })
+
+    //Para presionar enter cuando el cursor este en el input "cto_unit"
+    cto_unit.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_fac.value = cto_unit.value/cantidad.value
+        }
+    });
+
+    //para presionar enter cuando el cursor este en el input "cantidad"
+    cantidad.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_fac.value = cto_unit.value/cantidad.value;
+        }
+    });
+
+    gastos_varios.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_int.value = (1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_unit.value/cantidad.value);
+        }
+    });
+
+    impuesto.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_int.value = (1+(impuesto.value/100)) *(1+(gastos_varios.value/100))* (cto_unit.value/cantidad.value);
+        }
+    });
+
+</script>
+
 
 {% endblock content %}

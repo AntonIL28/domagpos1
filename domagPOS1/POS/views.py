@@ -75,7 +75,6 @@ def add_producto_view(request):
 
 
 
-
 def delete_producto_view(request, id):
     articulo = Productos.objects.get(pk=id)
     articulo.delete()
