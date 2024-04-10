@@ -3,6 +3,23 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
+
+<style>
+    #cto_unit, 
+    #cto_fac, 
+    #cto_int, 
+    #gastos_varios, 
+    #impuesto {
+        text-align: right;
+    }
+
+    #cantidad_unidad{
+        text-align: center;
+        width: 150px;
+    }
+
+</style>
+
 <div id="content_form_addproductos">
         <form method="POST" action="{% url 'AddProducto' %}"  id="wrapper" id="add_producto_form">
 
@@ -53,7 +70,7 @@
             <section class="footer_addp">
                 <h1 class="title_add">Impuestos</h1>
                 <label for="Cto_Unidad_Compras">Costo Unitario</label>
-                <input type="number" id="cto_unit" name="Cto_Unidad_Compras">
+                <input type="number" onkeypress="formatNumber(4, event)" id="cto_unit" name="Cto_Unidad_Compras">
                 <br>
                 
                 <label for="Porc_GastosVarios">Porc. Gastos Varios</label>
@@ -69,11 +86,13 @@
             <section class="coste_addp">
                 <!--Arroja informacion-->
                 <h1 class="title_add">Costos</h1>
+
                 <label for="Cto_Factura">Costo Factura</label>
                 <input type="number" id="cto_fac" name="Cto_Factura" readonly>
                 <br>
+
                 <label for="Cto_Integrado">Costo Integrado</label>
-                <input type="number" id="cto_int" name="Cto_Integrado"  readonly>
+                <input type="number" id="cto_int" name="Cto_Integrado" readonly>
                 <br>
             </section>
                 
@@ -88,7 +107,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script>
-
     var wrapper =document.getElementById("wrapper")
 
     var cto_unit = document.getElementById("cto_unit");
@@ -109,7 +127,12 @@
     cto_unit.addEventListener("keypress", event=> {
         if (event.keyCode === 13) {
             event.preventDefault();
-            cto_fac.value = cto_unit.value/cantidad.value
+
+            if(cantidad.value === ""){
+                cantidad.value = 1;
+            }
+
+            cto_fac.value = parseFloat(cto_unit.value/cantidad.value).toFixed(4);
         }
     });
 
@@ -117,25 +140,39 @@
     cantidad.addEventListener("keypress", event=> {
         if (event.keyCode === 13) {
             event.preventDefault();
-            cto_fac.value = cto_unit.value/cantidad.value;
+            cto_fac.value = parseFloat(cto_unit.value/cantidad.value).toFixed(4);
         }
     });
 
     gastos_varios.addEventListener("keypress", event=> {
         if (event.keyCode === 13) {
             event.preventDefault();
-            cto_int.value = (1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_unit.value/cantidad.value);
+            cto_int.value = parseFloat((1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_unit.value/cantidad.value)).toFixed(4);
         }
     });
 
     impuesto.addEventListener("keypress", event=> {
         if (event.keyCode === 13) {
             event.preventDefault();
-            cto_int.value = (1+(impuesto.value/100)) *(1+(gastos_varios.value/100))* (cto_unit.value/cantidad.value);
+            cto_int.value = parseFloat((1+(impuesto.value/100)) *(1+(gastos_varios.value/100))* (cto_unit.value/cantidad.value)).toFixed(4);
         }
     });
 
 </script>
 
+<script>
+    
+    function formatNumber(decimalPlaces, e) {
+        if(e.key === 'Enter'){
+            var inputValue = e.target.value;
+    
+            var floatValue = parseFloat(inputValue);
+        
+            e.target.value = floatValue.toFixed(decimalPlaces);
+        }
+    }
+
+</script>
+    
 
 {% endblock content %}
