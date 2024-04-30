@@ -21,87 +21,87 @@
 </style>
 
 <div id="content_form_addproductos">
-        <form method="POST" action="{% url 'AddProducto' %}"  id="wrapper" id="add_producto_form">
+    <form method="POST" action="{% url 'AddProducto' %}"  id="wrapper">
 
-            {% csrf_token %}
-            <section class="head_addp">
-                <label for="description">Descripcion</label>
-                <input type="text" id="description" name="description" required>
-            </section>
+        {% csrf_token %}
+        <section class="head_addp">
+            <label for="description">Descripcion</label>
+            <input type="text" id="description" name="description" required>
+        </section>
                 
-            <section class="codigo_add">
-                <label for="codigo">Codigo</label>
-                <input type="text" name="codigo" required>
-            </section>
+        <section class="codigo_add">
+            <label for="codigo">Codigo</label>
+            <input type="text" name="codigo" required>
+        </section>
 
-            <section class="body_addp">
-                <h1 class="title_add">Compras</h1>
-                <label for="Unidad_Compras">Unidad Compra</label>
-                <select type="text" name="Unidad_Compras">
-                    <option value="pieza">Pieza</option>
-                    <option value="paquete">Paquete</option>
-                    <option value="galon">Galon</option>
-                    <option value="Litro">Litro</option>
-                </select>
-                <br>
-
-                <label for="Unidad_Ventas">Unidad Venta</label>
-                <select type="text" name="Unidad_Ventas">
-                    <option value="pieza">Pieza</option>
-                    <option value="paquete">Paquete</option>
-                    <option value="galon">Galon</option>
-                    <option value="litro">Litro</option>
-                </select>
-                <br>
-
-                <label for="Unidad_Inventario">Unidad Inventario</label>
-                <select type="text" name="Unidad_Inventario">
-                    <option value="pieza">Pieza</option>
-                    <option value="paquete">Paquete</option>
-                    <option value="galon">Galon</option>
-                    <option value="litro">Litro</option>
-                </select>
-                <br>
-
-                <label for="cantidad_Unidad_Compras">Unidades</label>
-                <input type="text" class="cantidad_producto" id="cantidad_unidad" name="cantidad_Unidad_Compras">
-            </section>
-
-            <section class="footer_addp">
-                <h1 class="title_add">Impuestos</h1>
-                <label for="Cto_Unidad_Compras">Costo Unitario</label>
-                <input type="number" onkeypress="formatNumber(4, event)" id="cto_unit" name="Cto_Unidad_Compras">
-                <br>
-                
-                <label for="Porc_GastosVarios">Porc. Gastos Varios</label>
-                <input type="number" id="gastos_varios" name="Porc_GastosVarios">
-                <br>
-                
-                <label for="Porc_impuestos">Porc. Impuesto</label>
-                <input type="number" id="impuesto" name="Porc_impuestos">
-                <br>
-            </section>
+        <section class="body_addp">
+            <h1 class="title_add">Compras</h1>
             
+            <label class="label_add1" for="Unidad_Compras">Unidad Compra</label>
+            <select class="input_add1" type="text" name="Unidad_Compras">
+                <option value="pieza">Pieza</option>
+                <option value="paquete">Paquete</option>
+                <option value="galon">Galon</option>
+                <option value="Litro">Litro</option>
+            </select>
+            <br>
+
+            <label class="label_add1" for="Unidad_Ventas">Unidad Venta</label>
+            <select class="input_add1" type="text" name="Unidad_Ventas">
+                <option value="pieza">Pieza</option>
+                <option value="paquete">Paquete</option>
+                <option value="galon">Galon</option>
+                <option value="litro">Litro</option>
+            </select>
+            <br>
+
+            <label class="label_add1" for="Unidad_Inventario">Unidad Inventario</label>
+            <select class="input_add1" type="text" name="Unidad_Inventario">
+                <option value="pieza">Pieza</option>
+                <option value="paquete">Paquete</option>
+                <option value="galon">Galon</option>
+                <option value="litro">Litro</option>
+            </select>
+            <br>
+
+            <label class="label_add1" for="cantidad_Unidad_Compras">Unidades</label>
+            <input type="text" class="cantidad_producto" id="cantidad_unidad" name="cantidad_Unidad_Compras">
+        </section>
+
+        <section class="footer_addp">
+            <h1 class="title_add">Costos</h1>
+            <label class="label_add1" for="Cto_Unidad_Compras">Costo Unitario</label>
+            <input class="input_add2" type="number" onkeypress="formatNumber(4, event)" id="cto_unit" name="Cto_Unidad_Compras">
+            <br>
             
-            <section class="coste_addp">
-                <!--Arroja informacion-->
-                <h1 class="title_add">Costos</h1>
-
-                <label for="Cto_Factura">Costo Factura</label>
-                <input type="number" id="cto_fac" name="Cto_Factura" readonly>
-                <br>
-
-                <label for="Cto_Integrado">Costo Integrado</label>
-                <input type="number" id="cto_int" name="Cto_Integrado" readonly>
-                <br>
-            </section>
+            <label class="label_add1" for="Cto_Factura">Costo Factura</label>
+            <input class="input_add2" type="number" id="cto_fac" name="Cto_Factura" readonly>
+            <br>
                 
-            <section class="control_addp">
-                <a href="{% url 'Productos' %}">Regresar</a>
-                <input type="submit" value="Guardar" />
-            </section>
+            <label class="label_add1" for="Porc_GastosVarios">Porc. Gastos Varios</label>
+            <input class="input_add2" type="number" id="gastos_varios" name="Porc_GastosVarios">
+            <br>
+                
+            <label class="label_add1" for="Porc_impuestos">Porc. Impuesto</label>
+            <input class="input_add2" type="number" id="impuesto" name="Porc_impuestos">
+            <br>
+            
+            <label class="label_add1" for="Cto_Integrado">Costo Integrado</label>
+            <input class="input_add2" type="number" id="cto_int" name="Cto_Integrado" readonly>
+            <br>
+        </section>
+        
+        <section class="control_addp1">
+            <a href="{% url 'Productos' %}">Regresar</a>
+        </section>
+        
+        <section class="control_addp2">
+            <input type="submit" value="Guardar" />
+        </section>
+                 
+    </form>
 
-        </form>
+    
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -133,6 +133,7 @@
             }
 
             cto_fac.value = parseFloat(cto_unit.value/cantidad.value).toFixed(4);
+            cto_int.value = parseFloat((1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_unit.value/cantidad.value)).toFixed(4);
         }
     });
 
@@ -141,6 +142,7 @@
         if (event.keyCode === 13) {
             event.preventDefault();
             cto_fac.value = parseFloat(cto_unit.value/cantidad.value).toFixed(4);
+            cto_int.value = parseFloat((1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_unit.value/cantidad.value)).toFixed(4);
         }
     });
 

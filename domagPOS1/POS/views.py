@@ -201,8 +201,11 @@ def actualizar_producto(request, id):
         producto.Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
         producto.Porc_GastosVarios = request.POST['Porc_GastosVarios']
         producto.Porc_impuestos = request.POST['Porc_impuestos']
+        producto.Cto_Factura= request.POST['Cto_Factura']
+        producto.Cto_Integrado= request.POST['Cto_Integrado']
 
         producto.save()
-       
+
+        
         return redirect('Productos')
         

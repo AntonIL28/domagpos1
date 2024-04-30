@@ -1,20 +1,31 @@
 {% extends "layoutPOS.html" %}
 
 {% block content %}
-    {% if form.errors %}
-        <div>
-            This is a denger alert
-        </div>
-    {% endif %}
 
+<style>
+    #cto_unit, 
+    #cto_fac, 
+    #cto_int, 
+    #gastos_varios, 
+    #impuesto {
+        text-align: right;
+    }
+
+    #cantidad_unidad{
+        text-align: center;
+        width: 150px;
+    }
+
+</style>
+
+<div id="content_form_addproductos">
     <h1>Actualizar Productos</h1>
 
-    <form method="POST" action="{% url 'ActualizarProducto' producto.id %}"  class="wrapper">
+    <form method="POST" action="{% url 'ActualizarProducto' producto.id %}"  id="wrapper">
 
         {% csrf_token %}
         <section class="head_addp">
             <label for="description">Descripción:</label>
-            
             <input type="text" name="description" value="{{producto.description}}">
         </section>
             
@@ -53,33 +64,126 @@
             <br>
 
             <label for="cantidad_Unidad_Compras">Unidades</label>
-            <input type="text" name="cantidad_Unidad_Compras" value="{{producto.cantidad_Unidad_Compras}}">
+            <input type="text" name="cantidad_Unidad_Compras" id="cantidad_unidad" value="{{producto.cantidad_Unidad_Compras}}">
         </section>
 
         <section class="footer_addp">
             <h1 class="title_add">Costos</h1>
                 <label for="Cto_Unidad_Compras">Costo Unitario</label>
-                <input type="number" name="Cto_Unidad_Compras" value="{{producto.Cto_Unidad_Compras}}">
+                <input type="number" name="Cto_Unidad_Compras" id="cto_unit" value="{{producto.Cto_Unidad_Compras}}">
                 <br>
                 
                 <label for="Porc_GastosVarios">Porc. Gastos Varios</label>
-                <input type="number" name="Porc_GastosVarios" value="{{producto.Porc_GastosVarios}}">
+                <input type="number" name="Porc_GastosVarios" id="gastos_varios" value="{{producto.Porc_GastosVarios}}">
                 <br>
                 
                 <label for="Porc_impuestos">Porc. Impuesto</label>
-                <input type="number" name="Porc_impuestos" value="{{producto.Porc_impuestos}}">
+                <input type="number" name="Porc_impuestos" id="impuesto" value="{{producto.Porc_impuestos}}">
                 <br>
         </section>
+
+        <section class="coste_addp">
+            <!--Arroja informacion-->
+            <h1 class="title_add">Costos</h1>
+
+            <label for="Cto_Factura">Costo Factura</label>
+                <input type="number" id="cto_fac" name="Cto_Factura" value="{{producto.Cto_Factura}}" readonly>
+                <br>
+
+                <label for="Cto_Integrado">Costo Integrado</label>
+                <input type="number" id="cto_int" name="Cto_Integrado" value="{{producto.Cto_Integrado}}" readonly>
+                <br>
+            </section>
             
         <section class="control_addp">
             <a href="{% url 'Productos' %}">Regresar</a>
             <a href="{% url 'DeleteProducto' producto.id %}" ><button type="button" class="delete_producto_button">Eliminar</button></a>
             <input type="submit" value="Guardar" /> 
-        </section>
-
-            
+        </section> 
 
     </form>
+</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    var wrapper =document.getElementById("wrapper")
+
+    var cto_unit = document.getElementById("cto_unit");
+    var cantidad = document.getElementById("cantidad_unidad");
+    var cto_fac = document.getElementById("cto_fac");
+
+    var cto_int = document.getElementById("cto_int")
+    var impuesto = document.getElementById("impuesto");
+    var gastos_varios = document.getElementById("gastos_varios");
+
+    wrapper.addEventListener("keypress", event =>{
+        if (event.keyCode === 13){
+            event.preventDefault();
+        }
+    })
+
+    //Para presionar enter cuando el cursor este en el input "cto_unit"
+    cto_unit.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+
+            if(cantidad.value === ""){
+                cantidad.value = 1;
+            }
+
+            cto_fac.value = parseFloat(cto_unit.value/cantidad.value).toFixed(4);
+            cto_int.value = parseFloat((1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_fac.value)).toFixed(4);
+        }
+    });
+
+    //para presionar enter cuando el cursor este en el input "cantidad"
+    cantidad.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_fac.value = parseFloat(cto_unit.value/cantidad.value).toFixed(4);
+            cto_int.value = parseFloat((1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_fac.value)).toFixed(4);
+        }
+    });
+
+    gastos_varios.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_int.value = parseFloat((1+(impuesto.value/100)) * (1+(gastos_varios.value/100)) * (cto_unit.value/cantidad.value)).toFixed(4);
+        }
+    });
+
+    impuesto.addEventListener("keypress", event=> {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            cto_int.value = parseFloat((1+(impuesto.value/100)) *(1+(gastos_varios.value/100))* (cto_unit.value/cantidad.value)).toFixed(4);
+        }
+    });
+
+</script>
+
+<script>
+    
+    function formatNumber(decimalPlaces, e) {
+        if(e.key === 'Enter'){
+            var inputValue = e.target.value;
+    
+            var floatValue = parseFloat(inputValue);
+        
+            e.target.value = floatValue.toFixed(decimalPlaces);
+        }
+    }
+
+</script>
+
+<script>
+
+    document.getElementById('cantidad_unidad').addEventListener('keypress', function(event) {
+
+        if (event.keyCode === 13) {
+            event.preventDefault();
+        }
+    });
+</script>
 
 {% endblock %}
