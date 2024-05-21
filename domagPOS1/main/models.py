@@ -52,7 +52,7 @@ class Cliente(models.Model):
         return self.razon
 
 class Productos(models.Model):
-    codigo = models.CharField(max_length=200, unique=True, null=False)
+    codigo = models.CharField(max_length=200, null=False)
     description = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to='productos', null=True, blank=True) #original
     Unidad_Compras = models.CharField(max_length=200, null=False, default="")
@@ -64,6 +64,23 @@ class Productos(models.Model):
     Porc_GastosVarios = models.DecimalField(max_digits=15, decimal_places=2, null=False)
     Porc_impuestos = models.DecimalField(max_digits=15, decimal_places=2, null=False)
     Cto_Integrado = models.DecimalField(max_digits=15, decimal_places=4, null=False)
+    moneda = models.CharField(max_length=50, null=False, default="")
+    precio1 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    precio2 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    precio3 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    precio4 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    precio5 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    porc_util_1 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    porc_util_2 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    porc_util_3 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    porc_util_4 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    porc_util_5 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    codigo_bar_1 = models.CharField(max_length=200, default="")
+    codigo_bar_2 = models.CharField(max_length=200, default="")
+    codigo_bar_3 = models.CharField(max_length=200, default="")
+    codigo_bar_4 = models.CharField(max_length=200, default="")
+    codigo_bar_5 = models.CharField(max_length=200, default="")
+    codigo_prov = models.CharField(max_length=200, null=False, default="")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 

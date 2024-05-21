@@ -26,19 +26,19 @@
         {% csrf_token %}
         <section class="head_addp">
             <label for="description">Descripcion</label>
-            <input type="text" id="description" name="description" required>
+            <input type="text" id="description" name="description" value="{% if producto %}{{ producto.description }}{% endif %}"required>
         </section>
                 
         <section class="codigo_add">
             <label for="codigo">Codigo</label>
-            <input type="text" name="codigo" required>
+            <input type="text" name="codigo" value="{% if producto %}{{ producto.codigo }}{% endif %}" required>
         </section>
 
         <section class="body_addp">
             <h1 class="title_add">Compras</h1>
             
             <label class="label_add1" for="Unidad_Compras">Unidad Compra</label>
-            <select class="input_add1" type="text" name="Unidad_Compras">
+            <select class="input_add1" type="text" name="Unidad_Compras" value="{% if producto %}{{ producto.Unidad_Compras }}{% endif %}">
                 <option value="pieza">Pieza</option>
                 <option value="paquete">Paquete</option>
                 <option value="galon">Galon</option>
@@ -47,7 +47,7 @@
             <br>
 
             <label class="label_add1" for="Unidad_Ventas">Unidad Venta</label>
-            <select class="input_add1" type="text" name="Unidad_Ventas">
+            <select class="input_add1" type="text" name="Unidad_Ventas" value="{% if producto %}{{ producto.Unidad_Ventas }}{% endif %}">
                 <option value="pieza">Pieza</option>
                 <option value="paquete">Paquete</option>
                 <option value="galon">Galon</option>
@@ -56,7 +56,7 @@
             <br>
 
             <label class="label_add1" for="Unidad_Inventario">Unidad Inventario</label>
-            <select class="input_add1" type="text" name="Unidad_Inventario">
+            <select class="input_add1" type="text" name="Unidad_Inventario" value="{% if producto %}{{ producto.Unidad_Inventario}}{% endif %}">
                 <option value="pieza">Pieza</option>
                 <option value="paquete">Paquete</option>
                 <option value="galon">Galon</option>
@@ -65,38 +65,45 @@
             <br>
 
             <label class="label_add1" for="cantidad_Unidad_Compras">Unidades</label>
-            <input type="text" class="cantidad_producto" id="cantidad_unidad" name="cantidad_Unidad_Compras">
+            <input type="text" class="cantidad_producto" id="cantidad_unidad" name="cantidad_Unidad_Compras" value="{% if producto %}{{ producto.cantidad_Unidad_Compras }}{% endif %}">
         </section>
 
         <section class="footer_addp">
             <h1 class="title_add">Costos</h1>
             <label class="label_add1" for="Cto_Unidad_Compras">Costo Unitario</label>
-            <input class="input_add2" type="number" onkeypress="formatNumber(4, event)" id="cto_unit" name="Cto_Unidad_Compras">
+            <input class="input_add2" type="number" onkeypress="formatNumber(4, event)" id="cto_unit" name="Cto_Unidad_Compras" value="{% if producto %}{{ producto.Cto_Unidad_Compras }}{% endif %}">
             <br>
             
             <label class="label_add1" for="Cto_Factura">Costo Factura</label>
-            <input class="input_add2" type="number" id="cto_fac" name="Cto_Factura" readonly>
+            <input class="input_add2" type="number" id="cto_fac" name="Cto_Factura" readonly value="{% if producto %}{{ producto.Cto_Factura }}{% endif %}">
             <br>
                 
             <label class="label_add1" for="Porc_GastosVarios">Porc. Gastos Varios</label>
-            <input class="input_add2" type="number" id="gastos_varios" name="Porc_GastosVarios">
+            <input class="input_add2" type="number" id="gastos_varios" name="Porc_GastosVarios" value="{% if producto %}{{ producto.Porc_GastosVarios }}{% endif %}">
             <br>
                 
             <label class="label_add1" for="Porc_impuestos">Porc. Impuesto</label>
-            <input class="input_add2" type="number" id="impuesto" name="Porc_impuestos">
+            <input class="input_add2" type="number" id="impuesto" name="Porc_impuestos" value="{% if producto %}{{ producto.Porc_impuestos }}{% endif %}">
             <br>
             
             <label class="label_add1" for="Cto_Integrado">Costo Integrado</label>
-            <input class="input_add2" type="number" id="cto_int" name="Cto_Integrado" readonly>
+            <input class="input_add2" type="number" id="cto_int" name="Cto_Integrado" readonly value="{% if producto %}{{ producto.Cto_Integrado }}{% endif %}">
             <br>
         </section>
         
         <section class="control_addp1">
             <a href="{% url 'Productos' %}">Regresar</a>
         </section>
+
+        {% if producto %}
+            <section>
+                <a href="{% url 'DeleteProducto' producto.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+            </section>
+        {% endif %}
+        
         
         <section class="control_addp2">
-            <input type="submit" value="Guardar" />
+            <button type="submit">{% block submit_button %}Guardar{% endblock %}</button>
         </section>
                  
     </form>

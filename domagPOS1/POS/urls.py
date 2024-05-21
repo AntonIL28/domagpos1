@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import get_data
 
 urlpatterns = [
     #path('punto-venta/', views.POS, name="Punto Venta"),
@@ -10,15 +9,11 @@ urlpatterns = [
     path('edit_cliente/', views.edit_cliente_view, name="EditCliente"),
     path('delete_cliente/<str:id>', views.delete_cliente_view, name="DeleteCliente"),
     path('productos/', views.productos_view, name="Productos"),
-    path('add_producto/', views.add_producto_view, name="AddProducto"),
     path('delete_producto/<int:id>', views.delete_producto_view, name="DeleteProducto"),
-    path('editar_producto/<int:id>', views.editar_producto, name="EditarProducto"),
-    path('actualizar_producto/<int:id>', views.actualizar_producto, name="ActualizarProducto"),
-    path('get_data/', get_data, name='get_data'),
-    path('buscar/', views.buscar_cliente, name='buscar'),
-    path('buscar_p/', views.buscar_producto, name='buscar_p'),
-    path('seleccionar_elemento/<int:id>/', views.seleccionar, name='seleccionar_elemento'),
-    path('venta/', views.venta, name='venta'),
+    path('add_producto/', views.add_producto_view, name="AddProducto"),
+    path('editar_producto/<int:producto_id>', views.add_producto_view, name="EditarProducto"),
+    
+    #path('actualizar_producto/<int:id>', views.actualizar_producto, name="ActualizarProducto"),
     #path('export/', views.export_pdf_view, name="ExportPDF" ),
     #path('export/<id>/<iva>', views.export_pdf_view, name="ExportPDF" ),
 ]
