@@ -21,7 +21,7 @@
 </style>
 
 <div id="content_form_addproductos">
-    <form method="POST" action="{% url 'AddProducto' %}"  id="wrapper">
+    <form method="POST" id="wrapper">
 
         {% csrf_token %}
         <div class="head_addp">
@@ -91,13 +91,13 @@
         <div class="precios_addp">
             <div class="moneda" style="margin-bottom: 30px; margin-top: 35px;">
                 <label for="moneda" class="label_padd">Moneda</label>
-                <select class="input_padd" type="text" name="moneda" value="{% if producto %}{{ producto.moneda }}{% endif %}">
-                    <option value="MNX">MNX</option>
+                <select class="input_padd" id="moneda" type="text" name="moneda" value="{% if producto %}{{ producto.moneda }}{% endif %}">
+                    <option value="MXN">MXN</option>
                     <option value="USD">USD</option>
                 </select>
 
                 <label for="t_cambio" class="label_padd">T. Cambio</label>
-                <input class="input_paddp" type="number" step="any" name="t_cambio" value="{% if producto %}{{ producto.t_cambio }}{% endif %}">
+                <input class="input_paddp" type="number" id="t_cambio" step="any" name="t_cambio" value="{% if producto %}{{ producto.t_cambio }}{% endif %}">
             </div>
 
             <div class="labels_titlepadd">
@@ -115,28 +115,28 @@
                     <label for="" class="label_padd">Precio 5</label>
                 </div>
             
-                <div class="utilidad" style="margin-bottom: 30px;">
-                    <input class="input_paddu" type="number" step="any" name="porc_util_1" value="{% if producto %}{{ producto.porc_util_1 }}{% endif %}">
-                    <input class="input_paddu" type="number" step="any" name="porc_util_2" value="{% if producto %}{{ producto.porc_util_2 }}{% endif %}">
-                    <input class="input_paddu" type="number" step="any" name="porc_util_3" value="{% if producto %}{{ producto.porc_util_3 }}{% endif %}">
-                    <input class="input_paddu" type="number" step="any" name="porc_util_4" value="{% if producto %}{{ producto.porc_util_4 }}{% endif %}">
-                    <input class="input_paddu" type="number" step="any" name="porc_util_5" value="{% if producto %}{{ producto.porc_util_5 }}{% endif %}">
+                <div class="utilidad" id="utility" style="margin-bottom: 30px;">
+                    <input class="input_paddu" type="number" id="porc_util_1" step="any" name="porc_util_1" value="{% if producto %}{{ producto.porc_util_1 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_2" step="any" name="porc_util_2" value="{% if producto %}{{ producto.porc_util_2 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_3" step="any" name="porc_util_3" value="{% if producto %}{{ producto.porc_util_3 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_4" step="any" name="porc_util_4" value="{% if producto %}{{ producto.porc_util_4 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_5" step="any" name="porc_util_5" value="{% if producto %}{{ producto.porc_util_5 }}{% endif %}">
                 </div>
 
-                <div class="precios" style="margin-bottom: 30px;">
-                    <input class="input_paddp" type="number" step="any" name="precio1" value="{% if producto %}{{ producto.precio1 }}{% endif %}"> 
-                    <input class="input_paddp" type="number" step="any" name="precio2" value="{% if producto %}{{ producto.precio2 }}{% endif %}">
-                    <input class="input_paddp" type="number" step="any" name="precio3" value="{% if producto %}{{ producto.precio3 }}{% endif %}">
-                    <input class="input_paddp" type="number" step="any" name="precio4" value="{% if producto %}{{ producto.precio4 }}{% endif %}">
-                    <input class="input_paddp" type="number" step="any" name="precio5" value="{% if producto %}{{ producto.precio5 }}{% endif %}">
+                <div class="precios" id="precios" style="margin-bottom: 30px;">
+                    <input class="input_paddp" type="number" id="precio1" step="any" name="precio1" value="{% if producto %}{{ producto.precio1 }}{% endif %}"> 
+                    <input class="input_paddp" type="number" id="precio2" step="any" name="precio2" value="{% if producto %}{{ producto.precio2 }}{% endif %}">
+                    <input class="input_paddp" type="number" id="precio3" step="any" name="precio3" value="{% if producto %}{{ producto.precio3 }}{% endif %}">
+                    <input class="input_paddp" type="number" id="precio4" step="any" name="precio4" value="{% if producto %}{{ producto.precio4 }}{% endif %}">
+                    <input class="input_paddp" type="number" id="precio5" step="any" name="precio5" value="{% if producto %}{{ producto.precio5 }}{% endif %}">
                 </div>   
 
                 <div class="cbarras" style="margin-bottom: 30px;">
-                    <input class="input_paddc" type="number" step="any" name="precioMN1" value="{% if producto %}{{ producto.precioMN1 }}{% endif %}">
-                    <input class="input_paddc" type="number" step="any" name="precioMN2" value="{% if producto %}{{ producto.precioMN2 }}{% endif %}">
-                    <input class="input_paddc" type="number" step="any" name="precioMN3" value="{% if producto %}{{ producto.precioMN3 }}{% endif %}">
-                    <input class="input_paddc" type="number" step="any" name="precioMN4" value="{% if producto %}{{ producto.precioMN4 }}{% endif %}">
-                    <input class="input_paddc" type="number" step="any" name="precioMN5" value="{% if producto %}{{ producto.precioMN5 }}{% endif %}">
+                    <input class="input_paddc" type="number" id="precioMN1" step="any" name="precioMN1" value="{% if producto %}{{ producto.precioMN1 }}{% endif %}">
+                    <input class="input_paddc" type="number" id="precioMN2" step="any" name="precioMN2" value="{% if producto %}{{ producto.precioMN2 }}{% endif %}">
+                    <input class="input_paddc" type="number" id="precioMN3" step="any" name="precioMN3" value="{% if producto %}{{ producto.precioMN3 }}{% endif %}">
+                    <input class="input_paddc" type="number" id="precioMN4" step="any" name="precioMN4" value="{% if producto %}{{ producto.precioMN4 }}{% endif %}">
+                    <input class="input_paddc" type="number" id="precioMN5" step="any" name="precioMN5" value="{% if producto %}{{ producto.precioMN5 }}{% endif %}">
                 </div>
            </div>
     
@@ -156,7 +156,7 @@
         
         
         <div class="control_addp2">
-            <button type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+            <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
         </div>
                  
     </form>
@@ -166,6 +166,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+<!--Costos-->
 <script>
     var wrapper =document.getElementById("wrapper")
 
@@ -220,8 +221,43 @@
         }
     });
 
+
+    //Para logica en apartado de Costos
+    var utility = document.getElementById("utility");
+    var precios = document.getElementById("precios");
+    var moneda = document.getElementById("moneda");
+    var t_cambio = document.getElementById("t_cambio");
+
+    var porc_util_1 = document.getElementById("porc_util_1");
+    var porc_util_2 = document.getElementById("porc_util_2");
+    var porc_util_3 = document.getElementById("porc_util_3");
+    var porc_util_4 = document.getElementById("porc_util_4");
+    var porc_util_5 = document.getElementById("porc_util_5");
+
+    var precio1 = document.getElementById("precio1");
+    var precio2 = document.getElementById("precio2");
+    var precio3 = document.getElementById("precio3");
+    var precio4 = document.getElementById("precio4");
+    var precio5 = document.getElementById("precio5");
+
+    var precioMN1 = document.getElementById("precioMN1");
+
+    utility.addEventListener("keypress", event=>{
+        if(event.keyCode === 13){
+            event.preventDefault();
+            precio1.value= parseFloat(cto_int.value/((100-porc_util_1.value)/100)).toFixed(4);
+
+            if (moneda.value === "USD"){
+                precioMN1.value = parseFloat(precio1.value * t_cambio.value).toFixed(4);
+            } else {
+                precioMN1.value = precio1.value;
+            }
+        }
+    })
+   
 </script>
 
+<!--Valor decimal-->
 <script>
     
     function formatNumber(decimalPlaces, e) {
@@ -236,5 +272,11 @@
 
 </script>
     
+<!--Precios-->
+<script>
+    
+</script>
 
 {% endblock content %}
+
+
