@@ -162,46 +162,98 @@ def delete_cliente_view(request, id):
         
 def add_producto_view(request, producto_id=None):
 
-    producto = None
-    action = 'Nuevo Producto'
-
     if producto_id:
         producto = Productos.objects.get(id=producto_id)
         action = 'Editar Producto'
+    else:
+        producto = None
+        action = 'Nuevo Producto'
 
     if request.method == 'POST':
 
-        description = request.POST['description']
-        codigo = request.POST['codigo']
-        Unidad_Compras = request.POST['Unidad_Compras']
-        Unidad_Ventas = request.POST['Unidad_Ventas']
-        Unidad_Inventario = request.POST['Unidad_Inventario']
-        cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
-        Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
-        Porc_GastosVarios = request.POST['Porc_GastosVarios']
-        Porc_impuestos = request.POST['Porc_impuestos']
+        _description = request.POST['description']
+        _codigo = request.POST['codigo']
+        _Unidad_Compras = request.POST['Unidad_Compras']
+        _Unidad_Ventas = request.POST['Unidad_Ventas']
+        _Unidad_Inventario = request.POST['Unidad_Inventario']
+        _cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
+        _Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
+        _Porc_GastosVarios = request.POST['Porc_GastosVarios']
+        _Porc_impuestos = request.POST['Porc_impuestos']
+        _moneda = request.POST['moneda']
+        _t_cambio = request.POST['t_cambio']
+        _precio1 = request.POST['precio1']
+        _precio2 = request.POST['precio2']
+        _precio3 = request.POST['precio3']
+        _precio4 = request.POST['precio4']
+        _precio5 = request.POST['precio5']
+        _porc_util_1 = request.POST['porc_util_1']
+        _porc_util_2 = request.POST['porc_util_2']
+        _porc_util_3 = request.POST['porc_util_3']
+        _porc_util_4 = request.POST['porc_util_4']
+        _porc_util_5 = request.POST['porc_util_5']
+        _precioMN1 = request.POST['precioMN1']
+        _precioMN2 = request.POST['precioMN2']
+        _precioMN3 = request.POST['precioMN3']
+        _precioMN4 = request.POST['precioMN4']
+        _precioMN5 = request.POST['precioMN5']
+        _codigo_prov = request.POST['codigo_prov']
 
         if producto:
-            producto.description = description,
-            producto.codigo = codigo,
-            producto.Unidad_Compras = Unidad_Compras,
-            producto.Unidad_Ventas = Unidad_Ventas,
-            producto.Unidad_Inventario = Unidad_Inventario,
-            producto.cantidad_Unidad_Compras = cantidad_Unidad_Compras,
-            producto.Cto_Unidad_Compras = Cto_Unidad_Compras,
-            producto.Porc_GastosVarios = Porc_GastosVarios,
-            producto.Porc_impuestos = Porc_impuestos
+            producto.description = request.POST['description']
+            producto.codigo = request.POST['codigo']
+            producto.Unidad_Compras = request.POST['Unidad_Compras']
+            producto.Unidad_Ventas = request.POST['Unidad_Ventas']
+            producto.Unidad_Inventario = request.POST['Unidad_Inventario']
+            producto.cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
+            producto.Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
+            producto.Porc_GastosVarios = request.POST['Porc_GastosVarios']
+            producto.Porc_impuestos = request.POST['Porc_impuestos']
+            producto.Cto_Factura= request.POST['Cto_Factura']
+            producto.Cto_Integrado= request.POST['Cto_Integrado']
+            producto.moneda= request.POST['moneda']
+            producto.t_cambio= request.POST['t_cambio']
+            producto.precio1= request.POST['precio1']
+            producto.precio2= request.POST['precio2']
+            producto.precio3= request.POST['precio3']
+            producto.precio4= request.POST['precio4']
+            producto.precio5= request.POST['precio5']
+            producto.precioMN1= request.POST['precioMN1']
+            producto.precioMN2= request.POST['precioMN2']
+            producto.precioMN3= request.POST['precioMN3']
+            producto.precioMN4= request.POST['precioMN4']
+            producto.precioMN5= request.POST['precioMN5']
+            producto.codigo_prov= request.POST['codigo_prov']
             producto.save()
         else:
-            Productos.objects.create(description=description,
-                                     codigo=codigo,
-                                     Unidad_Compras=Unidad_Compras,
-                                     Unidad_Ventas = Unidad_Ventas,
-                                     Unidad_Inventario=Unidad_Inventario,
-                                     cantidad_Unidad_Compras = cantidad_Unidad_Compras,
-                                     Cto_Unidad_Compras=Cto_Unidad_Compras,
-                                     Porc_GastosVarios=Porc_GastosVarios,
-                                     Porc_impuestos=Porc_impuestos)
+            Productos.objects.create(description=_description,
+                                     codigo=_codigo,
+                                     Unidad_Compras=_Unidad_Compras,
+                                     Unidad_Ventas = _Unidad_Ventas,
+                                     Unidad_Inventario=_Unidad_Inventario,
+                                     cantidad_Unidad_Compras = _cantidad_Unidad_Compras,
+                                     Cto_Unidad_Compras=_Cto_Unidad_Compras,
+                                     Porc_GastosVarios=_Porc_GastosVarios,
+                                     Porc_impuestos=_Porc_impuestos,
+                                     moneda= _moneda,
+                                     t_cambio= _t_cambio,
+                                     precio1=_precio1,
+                                     precio2=_precio2,
+                                     precio3=_precio3,
+                                     precio4=_precio4,
+                                     precio5=_precio5,
+                                     porc_util_1=_porc_util_1,
+                                     porc_util_2=_porc_util_2,
+                                     porc_util_3=_porc_util_3,
+                                     porc_util_4=_porc_util_4,
+                                     porc_util_5=_porc_util_5,
+                                     precioMN1 = _precioMN1,
+                                     precioMN2 = _precioMN2,
+                                     precioMN3 = _precioMN3,
+                                     precioMN4 = _precioMN4,
+                                     precioMN5 = _precioMN5,
+                                     codigo_prov=_codigo_prov,
+                                     )
         return redirect('Productos')    
 
     return render(request, 'add_producto.html',{

@@ -629,14 +629,8 @@ footer{
     margin-left: 20px;
 }*/ /*En pausa*/
 
-#resultado{
-    width: 500px;
-    height: 500px;
-    background: red;
-}
-
 #content_form_addproductos{
-    width: 900px;
+    width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -659,10 +653,17 @@ footer{
     width: 100px;
 }
 
+.section_left-right{
+    grid-column: 1/5;
+    grid-row: 2;
+
+    display: flex;
+    justify-content: center;
+}
+
+
 /*Body_addp*/
 .body_addp{
-    grid-column: 1/3;
-    grid-row: 3;
     margin-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -679,10 +680,8 @@ footer{
     grid-column: 2/3;
 }
 
-/*footer_addp */
+/*footer_addp*/ 
 .footer_addp{
-    grid-column: 3/5;
-    grid-row: 3;
     margin-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
@@ -696,6 +695,14 @@ footer{
     height: 30px;
 }
 
+/*Precios*/
+.precios_addp{
+    grid-row: 3;
+    grid-column: 1/5;
+
+}
+
+/*cONTROL*/
 .control_addp1{
     grid-column: 2/3;
     grid-row:4;
@@ -740,4 +747,68 @@ footer{
     color: #fff;
     background: red;
     transition: 300ms all;
+}
+
+/*Edit preciosaddpp*/
+.body_precios_addp{
+    display: flex;
+}
+
+.labels_bodypadd{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 20px;
+}
+
+.labels_bodypadd .label_padd{
+    grid-column: 1/2;
+}
+
+.labels_bodypadd .input_padd{
+    grid-column: 2/3;
+}
+
+.precios{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr)
+}
+
+.precios .input_paddp{
+    grid-column: 2/3;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+/*utilidad*/
+.utilidad{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr)
+}
+
+.utilidad .input_paddu{
+    width: 100px;
+    grid-column: 2/3;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+/*Barras*/
+.cbarras{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr)
+}
+
+.cbarras .input_paddc{
+    grid-column: 2/3;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+.labels_titlepadd{
+    width: 53%;
+}
+
+.labels_titlepadd .label_paddt{
+    margin-left: 105px;
+    margin-bottom: 10px;
 }
