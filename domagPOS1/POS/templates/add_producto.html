@@ -131,7 +131,7 @@
                     <input class="input_paddp" type="number" id="precio5" step="any" name="precio5" value="{% if producto %}{{ producto.precio5 }}{% endif %}">
                 </div>   
 
-                <div class="cbarras" style="margin-bottom: 30px;">
+                <div class="preciosmn" style="margin-bottom: 30px;">
                     <input class="input_paddc" type="number" id="precioMN1" step="any" name="precioMN1" value="{% if producto %}{{ producto.precioMN1 }}{% endif %}">
                     <input class="input_paddc" type="number" id="precioMN2" step="any" name="precioMN2" value="{% if producto %}{{ producto.precioMN2 }}{% endif %}">
                     <input class="input_paddc" type="number" id="precioMN3" step="any" name="precioMN3" value="{% if producto %}{{ producto.precioMN3 }}{% endif %}">
@@ -223,6 +223,8 @@
 
 
     //Para logica en apartado de Costos
+    //var utility = parseFloat(document.getElementByClass("input_paddu").value); 
+    
     var utility = document.getElementById("utility");
     var precios = document.getElementById("precios");
     var moneda = document.getElementById("moneda");
@@ -273,9 +275,6 @@
 </script>
     
 <!--Precios-->
-<script>
-    
-</script>
 
 {% endblock content %}
 

@@ -101,3 +101,60 @@ class Productos(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Familia(models.Model):
+    id_familia = models.IntegerField(null=False, default=0)
+    description = models.CharField(max_length=255, null=False)
+
+    class Meta:
+        verbose_name = 'Familia'
+        verbose_name_plural = 'Familias'
+
+    def __str__(self):
+        return self.id
+    
+class Marca(models.Model):
+    id_marca = models.IntegerField(null=False, default=0)
+    description = models.CharField(max_length=255, null=False)
+
+    class Meta:
+        verbose_name = 'Marca'
+        verbose_name_plural = 'Marcas'
+
+    def __str__(self):
+        return self.id
+    
+class UnidadMedida(models.Model):
+    id_unidadmedida = models.IntegerField(null=False, default=0)
+    description = models.CharField(max_length=255, null=False)
+
+    class Meta:
+        verbose_name = 'UnidadMedida'
+        verbose_name_plural = 'UnidadesMedidas'
+
+    def __str__(self):
+        return self.id
+    
+class TipoCambio(models.Model):
+    fecha = models.DateField()
+    tc_venta = models.DecimalField(max_digits=8, decimal_places=2, null=False, default="0.00")
+    tc_compra = models.DecimalField(max_digits=8, decimal_places=2, null=False, default="0.00")
+    tc_dof = models.DecimalField(max_digits=8, decimal_places=2, null=False, default="0.00")
+
+    class Meta:
+        verbose_name = 'Tipo de cambio'
+
+    def __str__(self):
+        return self.tc_dof
+    
+class Proveedor(models.Model):
+    id_proveedor = models.IntegerField(default=0)
+    description = models.CharField(max_length=255, null=False)
+
+    class Meta:
+        verbose_name = 'Proveedor'
+        verbose_name_plural = 'Proveedores'
+
+    def __str__(self):
+        return self.description

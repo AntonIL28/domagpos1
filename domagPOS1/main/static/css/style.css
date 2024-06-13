@@ -795,12 +795,12 @@ footer{
 }
 
 /*Barras*/
-.cbarras{
+.preciosmn{
     display: grid;
     grid-template-columns: repeat(1, 1fr)
 }
 
-.cbarras .input_paddc{
+.preciosmn .input_paddc{
     grid-column: 2/3;
     margin-bottom: 15px;
     margin-left: 20px;
