@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from main.models import Cliente, Productos
+from main.models import Proveedor, Marca, Familia, UnidadMedida
 from main.forms import AddCliente, AddProducto
 from POS.models import Article
 import os
@@ -159,7 +160,8 @@ def delete_cliente_view(request, id):
 
         
         return redirect('Productos')"""
-        
+
+
 def add_producto_view(request, producto_id=None):
 
     if producto_id:
@@ -259,3 +261,150 @@ def add_producto_view(request, producto_id=None):
     return render(request, 'add_producto.html',{
         'producto': producto, 
         'action': action})
+
+def marca_view(request):
+    marca = Marca.objects.all()
+
+    return render(request, 'marca.html', {
+        'marca' : marca
+    })
+
+def add_marca_view(request, marca_id=None):
+
+    if marca_id:
+        marca = Marca.objects.get(id=marca_id)
+        action = 'Editar Marca'
+    else:
+        marca = None
+        action = 'Nueva Marca'
+
+    if request.method == 'POST':
+        _description = request.POST['description']
+        
+        if marca:
+            marca.description = request.POST['description']
+            marca.save()
+        else:
+            Marca.objects.create(description=_description)
+
+        return redirect('Marca') 
+    return render(request, 'add_marca.html',{
+        'marca' : marca,
+        'action' : action,
+    })
+
+def delete_marca(request, id):
+    marca = Marca.objects.get(pk=id)
+    marca.delete()
+
+    return redirect('Marca')
+
+def proveedor_view(request):
+    proveedor = Proveedor.objects.all()
+
+    return render(request, 'proveedor.html', {
+        'proveedor' : proveedor
+    })
+
+def add_proveedor_view(request, proveedor_id=None):
+    if proveedor_id:
+        proveedor = Proveedor.objects.get(id=proveedor_id)
+        action = 'Editar Proveedor'
+    else:
+        proveedor = None
+        action = 'Nuevo Proveedor'
+
+    if request.method == 'POST':
+        _description = request.POST['description']
+        
+        if proveedor:
+            proveedor.description = request.POST['description']
+            proveedor.save()
+        else:
+            Proveedor.objects.create(description=_description)
+
+        return redirect('Proveedor') 
+    return render(request, 'add_proveedor.html',{
+        'proveedor' : proveedor,
+        'action' : action,
+    })
+
+def delete_proveedor(request, id):
+    proveedor = Proveedor.objects.get(pk=id)
+    proveedor.delete()
+
+    return redirect('Proveedor')
+
+def familia_view(request):
+    familia = Familia.objects.all()
+
+    return render(request, 'familia.html', {
+        'familia' : familia
+    })
+
+def add_familia_view(request, familia_id=None):
+    if familia_id:
+        familia = Familia.objects.get(id=familia_id)
+        action = 'Editar Familia'
+    else:
+        familia = None
+        action = 'Nueva Familia'
+
+    if request.method == 'POST':
+        _description = request.POST['description']
+        
+        if familia:
+            familia.description = request.POST['description']
+            familia.save()
+        else:
+            Familia.objects.create(description=_description)
+
+        return redirect('Familia') 
+
+    return render(request, 'add_familia.html',{
+        'familia': familia,
+        'action' : action,
+    })
+
+def delete_familia(request, id):
+    familia = Familia.objects.get(pk=id)
+    familia.delete()
+
+    return redirect('Familia')
+
+def unidadmedida_view(request):
+    unidadmedida = UnidadMedida.objects.all()
+
+    return render(request, 'unidadmedida.html', {
+        'unidadmedida' : unidadmedida
+    })
+
+def add_unidadmedida_view(request, unidadmedida_id=None):
+
+    if unidadmedida_id:
+        unidadmedida = UnidadMedida.objects.get(id=unidadmedida_id)
+        action = 'Editar Unidad'
+    else:
+        unidadmedida = None
+        action = 'Nueva Unidad'
+
+    if request.method == 'POST':
+        _description = request.POST['description']
+        
+        if unidadmedida:
+            unidadmedida.description = request.POST['description']
+            unidadmedida.save()
+        else:
+            UnidadMedida.objects.create(description=_description)
+
+        return redirect('UnidadMedida') 
+    return render(request, 'add_unidadmedida.html',{
+        'unidadmedida' : unidadmedida,
+        'action' : action,
+    })
+
+def delete_unidadmedida(request, id):
+    unidadmedida = UnidadMedida.objects.get(pk=id)
+    unidadmedida.delete()
+
+    return redirect('UnidadMedida')

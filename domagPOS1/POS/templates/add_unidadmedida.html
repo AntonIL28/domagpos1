@@ -1,0 +1,32 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<style>
+    #description{
+        width: 250px;
+    }
+</style>
+
+
+<h1>Unidad Medida</h1>
+
+<form method="POST" class="uniq_form">
+
+    {% csrf_token %}
+    <div class="um_content">
+        <label for="description" class="marca_title">Descripcion</label>
+        <input type="text" id="description" name="description" value="{% if unidadmedida %}{{ unidadmedida.description }}{% endif %}"required>
+    </div>
+
+    <div class="um_control">
+        <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+
+        {% if unidadmedida %}
+                <a href="{% url 'DeleteUnidadMedida' unidadmedida.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+        {% endif %}
+    </div>
+
+{% endblock content %}

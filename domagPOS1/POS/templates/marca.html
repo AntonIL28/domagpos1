@@ -1,0 +1,30 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'AddMarca' %}" ><button type="button">Agregar Marca</button></a>
+
+<table class="tabla_ventas">
+    <thead>
+        <tr>
+            <th>Id Marca</th>
+            <th>Descripcion</th>
+            <th>Opcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for m in marca  %}
+        <tr class="product_td">
+            <td>{{m.id}}</td>
+            <td>{{m.description}}</td>
+            <td><a href="{% url 'EditMarca' m.id %}">Editar</a></td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>      
+{% endblock content %}

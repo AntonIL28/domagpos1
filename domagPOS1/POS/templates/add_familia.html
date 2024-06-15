@@ -1,0 +1,32 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+
+<style>
+    #description{
+        width: 250px;
+    }
+</style>
+        
+<h1>Familia</h1>
+        
+<form method="POST" class="uniq_form">
+
+    {% csrf_token %}
+    <div class="familia_content">
+        <label for="description" class="marca_title">Descripcion</label>
+        <input type="text" id="description" name="description" value="{% if familia %}{{ familia.description }}{% endif %}"required>
+    </div>
+
+    <div class="familia_control">
+        <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+
+        {% if familia %}
+                <a href="{% url 'DeleteFamilia' familia.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+        {% endif %}
+
+    </div>
+{% endblock content %}

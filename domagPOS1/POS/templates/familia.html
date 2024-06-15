@@ -1,0 +1,30 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'AddFamilia' %}" ><button type="button">Agregar Familia</button></a>
+
+<table class="tabla_ventas">
+    <thead>
+        <tr>
+            <th>Id Familia</th>
+            <th>Descripcion</th>
+            <th>Opcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for f in familia  %}
+        <tr class="product_td">
+            <td>{{f.id}}</td>
+            <td>{{f.description}}</td>
+            <td><a href="{% url 'EditFamilia' f.id %}">Editar</a></td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>      
+{% endblock content %}

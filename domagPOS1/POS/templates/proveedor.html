@@ -1,0 +1,30 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'AddProveedor' %}" ><button type="button">Agregar Proveedor</button></a>
+
+<table class="tabla_ventas">
+    <thead>
+        <tr>
+            <th>Id Proveedor</th>
+            <th>Descripcion</th>
+            <th>Opcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for p in proveedor  %}
+        <tr class="product_td">
+            <td>{{p.id}}</td>
+            <td>{{p.description}}</td>
+            <td><a href="{% url 'EditProveedor' p.id %}">Editar</a></td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>   
+{% endblock content %}

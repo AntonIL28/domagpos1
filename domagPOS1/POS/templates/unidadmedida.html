@@ -1,0 +1,30 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'AddUnidadMedida' %}" ><button type="button">Agregar Unidad</button></a>
+
+<table class="tabla_ventas">
+    <thead>
+        <tr>
+            <th>Id Unidad</th>
+            <th>Descripcion</th>
+            <th>Opcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for u in unidadmedida  %}
+        <tr class="product_td">
+            <td>{{u.id}}</td>
+            <td>{{u.description}}</td>
+            <td><a href="{% url 'EditUnidadMedida' u.id %}">Editar</a></td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>   
+{% endblock content %}

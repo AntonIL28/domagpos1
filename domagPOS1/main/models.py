@@ -104,7 +104,6 @@ class Productos(models.Model):
 
 
 class Familia(models.Model):
-    id_familia = models.IntegerField(null=False, default=0)
     description = models.CharField(max_length=255, null=False)
 
     class Meta:
@@ -112,10 +111,9 @@ class Familia(models.Model):
         verbose_name_plural = 'Familias'
 
     def __str__(self):
-        return self.id
+        return self.description
     
 class Marca(models.Model):
-    id_marca = models.IntegerField(null=False, default=0)
     description = models.CharField(max_length=255, null=False)
 
     class Meta:
@@ -123,10 +121,9 @@ class Marca(models.Model):
         verbose_name_plural = 'Marcas'
 
     def __str__(self):
-        return self.id
+        return self.description
     
 class UnidadMedida(models.Model):
-    id_unidadmedida = models.IntegerField(null=False, default=0)
     description = models.CharField(max_length=255, null=False)
 
     class Meta:
@@ -134,7 +131,7 @@ class UnidadMedida(models.Model):
         verbose_name_plural = 'UnidadesMedidas'
 
     def __str__(self):
-        return self.id
+        return self.description
     
 class TipoCambio(models.Model):
     fecha = models.DateField()
@@ -149,7 +146,6 @@ class TipoCambio(models.Model):
         return self.tc_dof
     
 class Proveedor(models.Model):
-    id_proveedor = models.IntegerField(default=0)
     description = models.CharField(max_length=255, null=False)
 
     class Meta:
