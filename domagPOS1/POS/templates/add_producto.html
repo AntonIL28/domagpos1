@@ -37,12 +37,16 @@
             <h1 class="title_add">Compras</h1>
             
             <label class="label_add1" for="Unidad_Compras">Unidad Compra</label>
-            <select class="input_add1" type="text" name="Unidad_Compras" value="{% if producto %}{{ producto.Unidad_Compras }}{% endif %}">
-                <option value="pieza">Pieza</option>
-                <option value="paquete">Paquete</option>
-                <option value="galon">Galon</option>
-                <option value="Litro">Litro</option>
+            <select class="input_add1" type="text" name="Unidad_Compras">
+
+                <option value=0>---------</option>
+
+                {% for u in unidad %}
+                    <option value="{{u.id}}">{{u.description}} - {{u.id}}</option>
+                {% endfor %}
+                
             </select>
+
             <br>
             <label class="label_add1" for="Unidad_Ventas">Unidad Venta</label>
             <select class="input_add1" type="text" name="Unidad_Ventas" value="{% if producto %}{{ producto.Unidad_Ventas }}{% endif %}">
@@ -274,7 +278,9 @@
 
 </script>
     
-<!--Precios-->
+<!--Select fields-->
+<script type="text/javascript">
+</script>
 
 {% endblock content %}
 

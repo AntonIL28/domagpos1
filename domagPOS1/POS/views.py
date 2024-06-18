@@ -163,6 +163,7 @@ def delete_cliente_view(request, id):
 
 
 def add_producto_view(request, producto_id=None):
+    unidadmedida = UnidadMedida.objects.all()
 
     if producto_id:
         producto = Productos.objects.get(id=producto_id)
@@ -204,7 +205,7 @@ def add_producto_view(request, producto_id=None):
         if producto:
             producto.description = request.POST['description']
             producto.codigo = request.POST['codigo']
-            producto.Unidad_Compras = request.POST['Unidad_Compras']
+            producto.Unidad_Compras = request.POST.get('Unidad_Compras')
             producto.Unidad_Ventas = request.POST['Unidad_Ventas']
             producto.Unidad_Inventario = request.POST['Unidad_Inventario']
             producto.cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
@@ -260,7 +261,8 @@ def add_producto_view(request, producto_id=None):
 
     return render(request, 'add_producto.html',{
         'producto': producto, 
-        'action': action})
+        'action': action,
+        'unidad': unidadmedida})
 
 def marca_view(request):
     marca = Marca.objects.all()
