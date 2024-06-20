@@ -56,8 +56,8 @@ class Productos(models.Model):
     description = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to='productos', null=True, blank=True) #original
     Unidad_Compras = models.IntegerField()
-    Unidad_Ventas = models.CharField(max_length=200, null=False, default="")
-    Unidad_Inventario = models.CharField(max_length=200, null=False, default="")
+    Unidad_Ventas = models.IntegerField()
+    Unidad_Inventario = models.IntegerField()
     cantidad_Unidad_Compras = models.IntegerField(default=1)
     Cto_Unidad_Compras = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     Cto_Factura = models.DecimalField(max_digits=15, decimal_places=4, null=False)
@@ -151,6 +151,15 @@ class Proveedor(models.Model):
     class Meta:
         verbose_name = 'Proveedor'
         verbose_name_plural = 'Proveedores'
+
+    def __str__(self):
+        return self.description
+    
+class Moneda(models.Model):
+    description = models.CharField(max_length=255, null=False)
+
+    class Meta:
+        verbose_name = 'Moneda'
 
     def __str__(self):
         return self.description

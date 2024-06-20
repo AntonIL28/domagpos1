@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from main.models import Cliente, Productos
-from main.models import Proveedor, Marca, Familia, UnidadMedida
+from main.models import Proveedor, Marca, Familia, UnidadMedida, Moneda
 from main.forms import AddCliente, AddProducto
 from POS.models import Article
 import os
@@ -164,7 +164,8 @@ def delete_cliente_view(request, id):
 
 def add_producto_view(request, producto_id=None):
     unidadmedida = UnidadMedida.objects.all()
-
+    moneda = Moneda.objects.all()
+    
     if producto_id:
         producto = Productos.objects.get(id=producto_id)
         action = 'Editar Producto'
@@ -262,7 +263,8 @@ def add_producto_view(request, producto_id=None):
     return render(request, 'add_producto.html',{
         'producto': producto, 
         'action': action,
-        'unidad': unidadmedida})
+        'unidad': unidadmedida,
+        'moneda': moneda})
 
 def marca_view(request):
     marca = Marca.objects.all()
@@ -410,3 +412,40 @@ def delete_unidadmedida(request, id):
     unidadmedida.delete()
 
     return redirect('UnidadMedida')
+
+def moneda_view(request):
+    moneda = Moneda.objects.all()
+
+    return render(request, 'moneda.html', {
+        'moneda' : moneda
+    })
+
+def add_moneda_view(request, moneda_id=None):
+
+    if moneda_id:
+        moneda = Moneda.objects.get(id=moneda_id)
+        action = 'Editar Moneda'
+    else:
+        moneda = None
+        action = 'Nueva Moneda'
+
+    if request.method == 'POST':
+        _description = request.POST['description']
+        
+        if moneda:
+            moneda.description = request.POST['description']
+            moneda.save()
+        else:
+            Moneda.objects.create(description=_description)
+
+        return redirect('Moneda') 
+    return render(request, 'add_moneda.html',{
+        'moneda' : moneda,
+        'action' : action,
+    })
+
+def delete_moneda(request, id):
+    moneda = Moneda.objects.get(pk=id)
+    moneda.delete()
+
+    return redirect('Moneda')

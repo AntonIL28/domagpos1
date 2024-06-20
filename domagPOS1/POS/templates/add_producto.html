@@ -38,30 +38,24 @@
             
             <label class="label_add1" for="Unidad_Compras">Unidad Compra</label>
             <select class="input_add1" type="text" name="Unidad_Compras">
-
-                <option value=0>---------</option>
-
                 {% for u in unidad %}
-                    <option value="{{u.id}}">{{u.description}} - {{u.id}}</option>
+                <option {% if producto.Unidad_Compras == u.id %}selected{% endif %} value="{{u.id}}">{{u.description}}</option>
                 {% endfor %}
-                
             </select>
 
             <br>
             <label class="label_add1" for="Unidad_Ventas">Unidad Venta</label>
-            <select class="input_add1" type="text" name="Unidad_Ventas" value="{% if producto %}{{ producto.Unidad_Ventas }}{% endif %}">
-                <option value="pieza">Pieza</option>
-                <option value="paquete">Paquete</option>
-                <option value="galon">Galon</option>
-                <option value="litro">Litro</option>
+            <select class="input_add1" type="text" name="Unidad_Ventas">
+                {% for u in unidad %}
+                <option {% if producto.Unidad_Ventas == u.id %}selected{% endif %} value="{{u.id}}">{{u.description}}</option>
+                {% endfor %}
             </select>
             <br>
             <label class="label_add1" for="Unidad_Inventario">Unidad Inventario</label>
             <select class="input_add1" type="text" name="Unidad_Inventario" value="{% if producto %}{{ producto.Unidad_Inventario}}{% endif %}">
-                <option value="pieza">Pieza</option>
-                <option value="paquete">Paquete</option>
-                <option value="galon">Galon</option>
-                <option value="litro">Litro</option>
+                {% for u in unidad %}
+                <option {% if producto.Unidad_Inventario == u.id %}selected{% endif %} value="{{u.id}}">{{u.description}}</option>
+                {% endfor %}
             </select>
             <br>
             <label class="label_add1" for="cantidad_Unidad_Compras">Unidades</label>
@@ -79,11 +73,11 @@
             <br>
                 
             <label class="label_add1" for="Porc_GastosVarios">Porc. Gastos Varios</label>
-            <input class="input_add2" type="number" step="any" id="gastos_varios" name="Porc_GastosVarios" value="{% if producto %}{{ producto.Porc_GastosVarios }}{% endif %}">
+            <input class="input_add2" type="number" step="any" onkeypress="formatNumber(2, event)" id="gastos_varios" name="Porc_GastosVarios" value="{% if producto %}{{ producto.Porc_GastosVarios }}{% endif %}">
             <br>
                 
             <label class="label_add1" for="Porc_impuestos">Porc. Impuesto</label>
-            <input class="input_add2" type="number" step="any" id="impuesto" name="Porc_impuestos" value="{% if producto %}{{ producto.Porc_impuestos }}{% endif %}">
+            <input class="input_add2" type="number" step="any" onkeypress="formatNumber(2, event)" id="impuesto" name="Porc_impuestos" value="{% if producto %}{{ producto.Porc_impuestos }}{% endif %}">
             <br>
             
             <label class="label_add1" for="Cto_Integrado">Costo Integrado</label>
@@ -95,13 +89,14 @@
         <div class="precios_addp">
             <div class="moneda" style="margin-bottom: 30px; margin-top: 35px;">
                 <label for="moneda" class="label_padd">Moneda</label>
-                <select class="input_padd" id="moneda" type="text" name="moneda" value="{% if producto %}{{ producto.moneda }}{% endif %}">
-                    <option value="MXN">MXN</option>
-                    <option value="USD">USD</option>
+                <select class="input_padd" id="moneda" type="text" name="moneda">
+                    {% for m in moneda %}
+                        <option {% if producto.moneda == m.description %}selected{% endif %} value="{{m.description}}">{{m.description}}</option>
+                    {% endfor %}
                 </select>
 
                 <label for="t_cambio" class="label_padd">T. Cambio</label>
-                <input class="input_paddp" type="number" id="t_cambio" step="any" name="t_cambio" value="{% if producto %}{{ producto.t_cambio }}{% endif %}">
+                <input class="input_paddp" type="number" id="t_cambio" step="any" onkeypress="formatNumber(2, event)" name="t_cambio" value="{% if producto %}{{ producto.t_cambio }}{% endif %}">
             </div>
 
             <div class="labels_titlepadd">
@@ -120,11 +115,11 @@
                 </div>
             
                 <div class="utilidad" id="utility" style="margin-bottom: 30px;">
-                    <input class="input_paddu" type="number" id="porc_util_1" step="any" name="porc_util_1" value="{% if producto %}{{ producto.porc_util_1 }}{% endif %}">
-                    <input class="input_paddu" type="number" id="porc_util_2" step="any" name="porc_util_2" value="{% if producto %}{{ producto.porc_util_2 }}{% endif %}">
-                    <input class="input_paddu" type="number" id="porc_util_3" step="any" name="porc_util_3" value="{% if producto %}{{ producto.porc_util_3 }}{% endif %}">
-                    <input class="input_paddu" type="number" id="porc_util_4" step="any" name="porc_util_4" value="{% if producto %}{{ producto.porc_util_4 }}{% endif %}">
-                    <input class="input_paddu" type="number" id="porc_util_5" step="any" name="porc_util_5" value="{% if producto %}{{ producto.porc_util_5 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_1" step="any" onkeypress="formatNumber(2, event)" name="porc_util_1" value="{% if producto %}{{ producto.porc_util_1 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_2" step="any" onkeypress="formatNumber(2, event)"  name="porc_util_2" value="{% if producto %}{{ producto.porc_util_2 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_3" step="any" onkeypress="formatNumber(2, event)"  name="porc_util_3" value="{% if producto %}{{ producto.porc_util_3 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_4" step="any" onkeypress="formatNumber(2, event)"  name="porc_util_4" value="{% if producto %}{{ producto.porc_util_4 }}{% endif %}">
+                    <input class="input_paddu" type="number" id="porc_util_5" step="any" onkeypress="formatNumber(2, event)"  name="porc_util_5" value="{% if producto %}{{ producto.porc_util_5 }}{% endif %}">
                 </div>
 
                 <div class="precios" id="precios" style="margin-bottom: 30px;">
@@ -229,8 +224,6 @@
     //Para logica en apartado de Costos
     //var utility = parseFloat(document.getElementByClass("input_paddu").value); 
     
-    var utility = document.getElementById("utility");
-    var precios = document.getElementById("precios");
     var moneda = document.getElementById("moneda");
     var t_cambio = document.getElementById("t_cambio");
 
@@ -248,9 +241,10 @@
 
     var precioMN1 = document.getElementById("precioMN1");
 
-    utility.addEventListener("keypress", event=>{
+    porc_util_1.addEventListener("keypress", event=>{
         if(event.keyCode === 13){
             event.preventDefault();
+
             precio1.value= parseFloat(cto_int.value/((100-porc_util_1.value)/100)).toFixed(4);
 
             if (moneda.value === "USD"){
@@ -260,7 +254,62 @@
             }
         }
     })
+
+    porc_util_2.addEventListener("keypress", event=>{
+        if(event.keyCode === 13){
+            event.preventDefault();
+
+            precio2.value= parseFloat(cto_int.value/((100-porc_util_2.value)/100)).toFixed(4);
+
+            if (moneda.value === "USD"){
+                precioMN2.value = parseFloat(precio2.value * t_cambio.value).toFixed(4);
+            } else {
+                precioMN2.value = precio2.value;
+            }
+        }
+    })
    
+    porc_util_3.addEventListener("keypress", event=>{
+        if(event.keyCode === 13){
+            event.preventDefault();
+
+            precio3.value= parseFloat(cto_int.value/((100-porc_util_3.value)/100)).toFixed(4);
+
+            if (moneda.value === "USD"){
+                precioMN3.value = parseFloat(precio3.value * t_cambio.value).toFixed(4);
+            } else {
+                precioMN3.value = precio3.value;
+            }
+        }
+    })
+
+    porc_util_4.addEventListener("keypress", event=>{
+        if(event.keyCode === 13){
+            event.preventDefault();
+
+            precio4.value= parseFloat(cto_int.value/((100-porc_util_4.value)/100)).toFixed(4);
+
+            if (moneda.value === "USD"){
+                precioMN4.value = parseFloat(precio4.value * t_cambio.value).toFixed(4);
+            } else {
+                precioMN4.value = precio4.value;
+            }
+        }
+    })
+
+    porc_util_5.addEventListener("keypress", event=>{
+        if(event.keyCode === 13){
+            event.preventDefault();
+
+            precio5.value= parseFloat(cto_int.value/((100-porc_util_5.value)/100)).toFixed(4);
+
+            if (moneda.value === "USD"){
+                precioMN5.value = parseFloat(precio5.value * t_cambio.value).toFixed(4);
+            } else {
+                precioMN5.value = precio5.value;
+            }
+        }
+    })
 </script>
 
 <!--Valor decimal-->
@@ -276,10 +325,6 @@
         }
     }
 
-</script>
-    
-<!--Select fields-->
-<script type="text/javascript">
 </script>
 
 {% endblock content %}

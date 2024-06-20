@@ -28,6 +28,10 @@ urlpatterns = [
     path('add_unidadmedida/', views.add_unidadmedida_view, name="AddUnidadMedida"),
     path('edit_unidadmedida/<int:unidadmedida_id>', views.add_unidadmedida_view, name="EditUnidadMedida"),
     path('delete_unidadmedida/<int:id>', views.delete_unidadmedida, name="DeleteUnidadMedida"),
+    path('moneda/', views.moneda_view, name="Moneda"),
+    path('add_moneda/', views.add_moneda_view, name="AddMoneda"),
+    path('edit_moneda/<int:moneda_id>', views.add_moneda_view, name="EditMoneda"),
+    path('delete_moneda/<int:id>', views.delete_moneda, name="DeleteMoneda"),
     
     #path('actualizar_producto/<int:id>', views.actualizar_producto, name="ActualizarProducto"),
     #path('export/', views.export_pdf_view, name="ExportPDF" ),
