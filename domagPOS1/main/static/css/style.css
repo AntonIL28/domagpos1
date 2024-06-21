@@ -824,3 +824,15 @@ footer{
     border: 1px solid black;
     border-radius: 5px;
 }
+
+/* Formularios Nuevos */
+.content_uniq{
+    display: flex;
+    justify-content: center;
+    text-align: -webkit-center;
+}
+
+.uniq_form{
+    align-self: center;
+    margin: 10px;
+}

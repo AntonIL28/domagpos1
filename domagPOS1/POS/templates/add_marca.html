@@ -6,26 +6,38 @@
 <style>
     #description{
         width: 250px;
+        display:  block;
+    }
+
+    h1{
+        margin-bottom: 20px;
+    }
+
+    input{
+        margin-top: 10px;
     }
 </style>
 
 
-<h1>Marca</h1>
 
-<form method="POST" class="uniq_form">
+<div class="content_uniq">
+    <form method="POST" class="uniq_form">
 
-    {% csrf_token %}
-    <div class="marca_content">
-        <label for="description" class="marca_title">Descripcion</label>
-        <input type="text" id="description" name="description" value="{% if marca %}{{ marca.description }}{% endif %}"required>
-    </div>
+        {% csrf_token %}
+        <div class="marca_content">
+            <h1>Marca</h1>
+            <label for="description" class="marca_title">Capture la descripcion de la marca.</label>
+            <input type="text" id="description" name="description" value="{% if marca %}{{ marca.description }}{% endif %}"required>
+        </div>
 
-    <div class="marca_control">
-        <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+        <div class="marca_control">
+            <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
 
-        {% if marca %}
-                <a href="{% url 'DeleteMarca' marca.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
-        {% endif %}
-    </div>
+            {% if marca %}
+                    <a href="{% url 'DeleteMarca' marca.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+            {% endif %}
 
+            <a href="{% url 'Marca' %}">Regresar</a>
+        </div>
+</div>
 {% endblock content %}

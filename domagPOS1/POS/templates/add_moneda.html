@@ -6,26 +6,37 @@
 <style>
     #description{
         width: 250px;
+        display: block;
+    }
+
+    h1{
+        margin-bottom: 20px;
+    }
+
+    input{
+        margin-top: 10px;
     }
 </style>
 
+<div class="content_uniq">
+    <form method="POST" class="uniq_form">
 
-<h1>Moneda</h1>
+        {% csrf_token %}
+        <div class="moneda_content">
+            <h1>Moneda</h1>
+            <label for="description" class="moneda_title">Capture la descripcion de la moneda.</label>
+            <input type="text" id="description" name="description" value="{% if moneda %}{{ moneda.description }}{% endif %}"required>
+        </div>
 
-<form method="POST" class="uniq_form">
+        <div class="moneda_control">
+            <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
 
-    {% csrf_token %}
-    <div class="moneda_content">
-        <label for="description" class="moneda_title">Descripcion</label>
-        <input type="text" id="description" name="description" value="{% if moneda %}{{ moneda.description }}{% endif %}"required>
-    </div>
+            {% if marca %}
+                    <a href="{% url 'DeleteMoneda' marca.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+            {% endif %}
 
-    <div class="moneda_control">
-        <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
-
-        {% if marca %}
-                <a href="{% url 'DeleteMoneda' marca.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
-        {% endif %}
-    </div>
+            <a href="{% url 'Moneda' %}">Regresar</a>
+        </div>
+</div>
 
 {% endblock content %}
