@@ -18,6 +18,21 @@
         width: 150px;
     }
 
+    .control_addp1{
+        display:flex;
+    }
+
+    #regresar_addp{
+        margin-right: 10px;
+    }
+
+    #guardar_addp{
+        margin-right: 10px;
+    }
+
+    .delete_producto_button{
+        margin-right: 10px;
+    }
 </style>
 
 <div id="content_form_addproductos">
@@ -96,7 +111,7 @@
                 </select>
 
                 <label for="t_cambio" class="label_padd">T. Cambio</label>
-                <input class="input_paddp" type="number" id="t_cambio" step="any" onkeypress="formatNumber(2, event)" name="t_cambio" value="{% if producto %}{{ producto.t_cambio }}{% endif %}">
+                <input class="input_paddp" type="number" id="t_cambio" step="any" onkeypress="formatNumber(4, event)" name="t_cambio" value="{% if producto %}{{ producto.t_cambio }}{% endif %}">
             </div>
 
             <div class="labels_titlepadd">
@@ -144,18 +159,13 @@
         </div>
 
         <div class="control_addp1">
-            <a href="{% url 'Productos' %}">Regresar</a>
-        </div>
-
-        {% if producto %}
-            <div>
-                <a href="{% url 'DeleteProducto' producto.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
-            </div>
-        {% endif %}
-        
-        
-        <div class="control_addp2">
+            <a href="{% url 'Productos' %}"><button type="button" id="regresar_addp">Regresar</button></a>
             <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+            {% if producto %}
+                <div>
+                    <a href="{% url 'DeleteProducto' producto.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+                </div>
+            {% endif %}
         </div>
                  
     </form>
@@ -325,6 +335,13 @@
         }
     }
 
+</script>
+
+<!--Focus input-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("description").focus();
+    });
 </script>
 
 {% endblock content %}

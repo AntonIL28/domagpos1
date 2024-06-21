@@ -4,7 +4,14 @@
 
 {% block content %}
 
-<a href="{% url 'AddUnidadMedida' %}" ><button type="button">Agregar Unidad</button></a>
+<style>
+    button{
+        margin-left: 430px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<a href="{% url 'AddUnidadMedida' %}" ><button type="button" id="guardar_addp">Agregar Unidad</button></a>
 
 <table class="tabla_ventas">
     <thead>

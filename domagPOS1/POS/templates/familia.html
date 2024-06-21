@@ -4,7 +4,14 @@
 
 {% block content %}
 
-<a href="{% url 'AddFamilia' %}" ><button type="button">Agregar Familia</button></a>
+<style>
+    button{
+        margin-left: 430px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<a href="{% url 'AddFamilia' %}" ><button type="button" id="guardar_addp">Agregar Familia</button></a>
 
 <table class="tabla_ventas">
     <thead>

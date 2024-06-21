@@ -4,7 +4,14 @@
 
 {% block content %}
 
-<a href="{% url 'AddMoneda' %}" ><button type="button">Agregar Moneda</button></a>
+<style>
+    button{
+        margin-left: 430px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<a href="{% url 'AddMoneda' %}" ><button type="button" id="guardar_addp">Agregar Moneda</button></a>
 
 <table class="tabla_ventas">
     <thead>

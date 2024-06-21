@@ -704,7 +704,7 @@ footer{
 
 /*cONTROL*/
 .control_addp1{
-    grid-column: 2/3;
+    grid-column: 1/2;
     grid-row:4;
     margin-top: 40px;
     margin-left: auto;
@@ -820,6 +820,15 @@ footer{
     padding: 10px;
     margin-top: 10px;
     background: rgb(34, 0, 255);
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#regresar_addp{
+    padding: 10px;
+    margin-top: 10px;
+    background: rgb(80, 93, 179);
     color: white;
     border: 1px solid black;
     border-radius: 5px;

@@ -4,7 +4,14 @@
 
 {% block content %}
 
-<a href="{% url 'AddProveedor' %}" ><button type="button">Agregar Proveedor</button></a>
+<style>
+    button{
+        margin-left: 430px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<a href="{% url 'AddProveedor' %}" ><button type="button" id="guardar_addp">Agregar Proveedor</button></a>
 
 <table class="tabla_ventas">
     <thead>

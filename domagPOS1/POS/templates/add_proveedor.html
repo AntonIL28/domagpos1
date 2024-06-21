@@ -6,8 +6,10 @@
 
 <style>
     #description{
-        width: 250px;
+        width: 500px;
         display: block;
+        text-align: center;
+        font-size: 15px;
     }
 
     h1{
@@ -36,8 +38,14 @@
                     <a href="{% url 'DeleteProveedor' proveedor.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
             {% endif %}
 
-            <a href="{% url 'Proveedor' %}">Regresar</a>
+            <a href="{% url 'Proveedor' %}"><button id="regresar_addp" type="button">Regresar</button></a>
         </div>
 </div>
 
+<!--Focus input-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("description").focus();
+    });
+</script>
 {% endblock content %}

@@ -5,10 +5,12 @@
 {% block content %}
 <style>
     #description{
-        width: 250px;
-        display:  block;
+        width: 500px;
+        display: block;
+        text-align: center;
+        font-size: 15px;
     }
-
+    
     h1{
         margin-bottom: 20px;
     }
@@ -37,7 +39,14 @@
                     <a href="{% url 'DeleteMarca' marca.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
             {% endif %}
 
-            <a href="{% url 'Marca' %}">Regresar</a>
+            <a href="{% url 'Marca' %}"><button id="regresar_addp" type="button">Regresar</button></a>
         </div>
 </div>
+
+<!--Focus input-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("description").focus();
+    });
+</script>
 {% endblock content %}
