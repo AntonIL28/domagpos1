@@ -169,9 +169,11 @@ def add_producto_view(request, producto_id=None):
     if producto_id:
         producto = Productos.objects.get(id=producto_id)
         action = 'Editar Producto'
+        title = 'Editar Producto'
     else:
         producto = None
         action = 'Nuevo Producto'
+        title = 'Nuevo Producto'
 
     if request.method == 'POST':
 
@@ -202,6 +204,7 @@ def add_producto_view(request, producto_id=None):
         _precioMN4 = request.POST['precioMN4']
         _precioMN5 = request.POST['precioMN5']
         _codigo_prov = request.POST['codigo_prov']
+        _codigo_barras = request.POST['codigo_barras']
 
         if producto:
             producto.description = request.POST['description']
@@ -228,6 +231,7 @@ def add_producto_view(request, producto_id=None):
             producto.precioMN4= request.POST['precioMN4']
             producto.precioMN5= request.POST['precioMN5']
             producto.codigo_prov= request.POST['codigo_prov']
+            producto.codigo_barras = request.POST['codigo_barras']
             producto.save()
         else:
             Productos.objects.create(description=_description,
@@ -257,20 +261,25 @@ def add_producto_view(request, producto_id=None):
                                      precioMN4 = _precioMN4,
                                      precioMN5 = _precioMN5,
                                      codigo_prov=_codigo_prov,
+                                     codigo_barras=_codigo_barras,
                                      )
+        
+
         return redirect('Productos')    
 
     return render(request, 'add_producto.html',{
         'producto': producto, 
         'action': action,
         'unidad': unidadmedida,
-        'moneda': moneda})
+        'moneda': moneda,
+        'title':title})
 
 def marca_view(request):
     marca = Marca.objects.all()
 
     return render(request, 'marca.html', {
-        'marca' : marca
+        'marca' : marca,
+        'title' : 'Marca'
     })
 
 def add_marca_view(request, marca_id=None):
@@ -307,7 +316,8 @@ def proveedor_view(request):
     proveedor = Proveedor.objects.all()
 
     return render(request, 'proveedor.html', {
-        'proveedor' : proveedor
+        'proveedor' : proveedor,
+        'title': 'Proveedor'
     })
 
 def add_proveedor_view(request, proveedor_id=None):
@@ -343,7 +353,8 @@ def familia_view(request):
     familia = Familia.objects.all()
 
     return render(request, 'familia.html', {
-        'familia' : familia
+        'familia' : familia,
+        'title': 'Familia'
     })
 
 def add_familia_view(request, familia_id=None):
@@ -380,7 +391,8 @@ def unidadmedida_view(request):
     unidadmedida = UnidadMedida.objects.all()
 
     return render(request, 'unidadmedida.html', {
-        'unidadmedida' : unidadmedida
+        'unidadmedida' : unidadmedida,
+        'title': 'Unidad Medida'
     })
 
 def add_unidadmedida_view(request, unidadmedida_id=None):
@@ -417,7 +429,8 @@ def moneda_view(request):
     moneda = Moneda.objects.all()
 
     return render(request, 'moneda.html', {
-        'moneda' : moneda
+        'moneda' : moneda,
+        'title': 'Moneda'
     })
 
 def add_moneda_view(request, moneda_id=None):

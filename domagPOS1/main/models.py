@@ -82,6 +82,7 @@ class Productos(models.Model):
     precioMN4 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
     precioMN5 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
     codigo_prov = models.CharField(max_length=200, null=False, default="")
+    codigo_barras = models.CharField(max_length=200, null=False, default="")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 

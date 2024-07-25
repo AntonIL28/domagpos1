@@ -33,8 +33,8 @@
         <div class="moneda_control">
             <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
 
-            {% if marca %}
-                    <a href="{% url 'DeleteMoneda' marca.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+            {% if moneda %}
+                    <a href="{% url 'DeleteMoneda' moneda.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
             {% endif %}
 
             <a href="{% url 'Moneda' %}"><button id="regresar_addp" type="button">Regresar</button></a>
