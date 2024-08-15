@@ -1,0 +1,73 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<style>
+    #description{
+        width: 500px;
+        display: block;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    h1{
+        margin-bottom: 20px;
+    }
+
+    input{
+        margin-top: 10px;
+    }
+</style>
+
+<div class="content_uniq">
+    <form method="POST" class="uniq_form">
+        {% csrf_token %}
+        <div>
+            <h1>Tipo de Cambio</h1>
+
+            <div class="content_fecha">
+                <label for="fecha">Fecha</label>
+                <input type="date" name="fecha" value="{% if tcambio %}{{ tcambio.fecha }}{% endif %}"required>
+            </div>
+
+            <div class="content_venta">  
+                <label for="tc_venta">Venta</label>
+                <input type="number" step="any" name="tc_venta" value="{% if tcambio %}{{ tcambio.tc_venta }}{% endif %}"required>
+            </div>
+
+            <div class="content_compra">  
+                <label for="tc_compra">Compra</label>
+                <input type="number" step="any" name="tc_compra" value="{% if tcambio %}{{ tcambio.tc_compra }}{% endif %}"required>
+            </div>
+
+            <div class="content_dof">  
+                <label for="tc_dof">DOF</label>
+                <input type="number" step="any" name="tc_dof" value="{% if tcambio %}{{ tcambio.tc_dof }}{% endif %}"required>
+            </div>
+
+            <div class="content_precio">  
+                <label for="tc_precios">Precio</label>
+                <input type="number" step="any" name="tc_precios" value="{% if tcambio %}{{ t_cambio.tc_precios }}{% endif %}"required>
+            </div>
+
+            <div class="um_control">
+                <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+
+                {% if tcambio %}
+                    <a href="{% url 'DeleteTipoCambio' tcambio.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+                {% endif %}
+
+                <a href="{% url 'TipoCambio' %}"><button id="regresar_addp" type="button">Regresar</button></a>
+            </div>
+        </div>
+</div>
+
+<!--Focus input-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("description").focus();
+    });
+</script>
+{% endblock content %}

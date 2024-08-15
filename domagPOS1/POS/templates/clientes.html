@@ -17,7 +17,7 @@
             <input type="text">
         </div>
     </div>   
-    <table class="tabla_clientes">
+    <table class="tabla_ventas">
         <thead>
             <tr>
                 <th>Razon</th>
@@ -36,9 +36,9 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody >
             {% for i in clientes %}
-            <tr>
+            <tr class="product_td">
                 <td>{{i.razon}}</td>
                 <td>{{i.rfc}}</td>
                 <td>{{i.credito}}</td>
@@ -51,10 +51,7 @@
                 <td>{{i.dirnumext}}</td>
                 <td>{{i.dirnumint}}</td>
                 <td>{{i.telefono}}</td>
-                <td>
-                    <button type="button", onclick="editarPersonal", class="uno">Editar</button>
-                    <a href="{% url 'DeleteCliente' i.id  %}"><button type="button" class="dos">Eliminar</button></a>
-                </td>
+                <td><a href="{% url 'EditCliente' i.id %}">Editar</a></td>
             </tr>
             {% endfor %}  
         </tbody>

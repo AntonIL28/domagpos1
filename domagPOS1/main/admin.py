@@ -18,7 +18,7 @@ class ProductosAdmin(admin.ModelAdmin):
     filter_horizontal =()
     list_filter =()
     fieldsets =()
-admin.site.register(Productos, ProductosAdmin)
+admin.site.register(Productos, ProductosAdmin)"""
 
 class EstadoAdmin(admin.ModelAdmin):
     list_display = ['nombre','codigo']
@@ -45,7 +45,7 @@ class ColoniaAdmin(admin.ModelAdmin):
     filter_horizontal =()
     list_filter =()
     fieldsets =()
-admin.site.register(dir_Colonia, ColoniaAdmin)"""
+admin.site.register(dir_Colonia, ColoniaAdmin)
 
 class FamiliaAdmin(admin.ModelAdmin):
     list_display = ['description']

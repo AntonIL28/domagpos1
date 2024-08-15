@@ -310,19 +310,6 @@ div.pie{
     border-radius: 5px;
 }
 
-.tabla_ventas td .uno:hover{
-    cursor: pointer;
-    background:rgb(77, 77, 246);
-    color: white;
-    transition: all 300ms;
-}
-
-.tabla_ventas .dos:hover{
-    cursor: pointer;
-    background:rgb(245, 56, 43);
-    color: white;
-    transition: all 300ms;
-}
 
 .agregar_producto{
     width: 150px;
@@ -743,11 +730,11 @@ footer{
 
 .title_add{
     width: 120px;
-    grid-column: 1/3;
-    grid-row: 1;
     margin-left: auto;
     margin-right: auto;
-    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 24px;
     color: #000000;
 }
 
@@ -778,9 +765,19 @@ footer{
     display: flex;
 }
 
-.labels_titlepadd .label_paddt{
-    margin-left: 105px;
+.labels_titlepadd{
+    margin-left: 120px;
+    margin-right: 60px;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.labels_bodypadd{
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin-right: 10px;
 }
 
 #guardar_addp{
@@ -816,4 +813,66 @@ footer{
 #justify_compras{
     display: grid;
     align-items: baseline;
+}
+
+
+#inputs_content{
+    display: flex;
+}
+
+/*Clientes add*/
+#content_form_addclientes{
+    display: flex;
+    justify-content: center;
+}
+
+#wrapper_clientes{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    grid-auto-rows: minmax(30px, auto);
+    width: 80%;
+}
+
+.head_addc{
+    border: 2px solid #979797;
+    border-radius: 10px;
+    padding: 10px;
+    background: #ffffff;
+    grid-column: 1 / 5;
+    grid-row: 1;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.center_content_addc{
+    grid-column: 1 / 5;
+    grid-row: 2;   
+    display: flex;
+    justify-content: space-between;
+}
+
+.body_addc{
+    width: 39%;
+}
+
+.content_body_addc{
+    border: 2px solid #979797;
+    border-radius: 10px;
+    padding: 10px;
+    background: #ffffff;
+    margin-bottom: 30px;
+}
+
+.content_footer_addc{
+    display: flex;
+}
+
+.footer_addc{
+    border: 2px solid #979797;
+    border-radius: 10px;
+    padding: 10px;
+    background: #ffffff;
+    margin-bottom: 30px;
+    width: 58%;
 }

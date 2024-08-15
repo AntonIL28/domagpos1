@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse
 from main.models import Cliente, Productos
-from main.models import Proveedor, Marca, Familia, UnidadMedida, Moneda
+from main.models import Proveedor, Marca, Familia, UnidadMedida, Moneda, TipoCambio
+from main.models import dir_Ciudad, dir_Colonia, dir_Estado
 from main.forms import AddCliente, AddProducto
 from POS.models import Article
+from datetime import datetime, timedelta
+from django.utils import timezone
 import os
 
 def POS(request):
@@ -31,101 +35,87 @@ def productos_view(request):
         'productos' : productos
     })
 
-"""def add_producto_view(request):
-
-    context={}
-
-    if request.method == 'POST':
-
-        estado=False
-
-        description = request.POST['description']
-        codigo = request.POST['codigo']
-        Unidad_Compras = request.POST['Unidad_Compras']
-        Unidad_Ventas = request.POST['Unidad_Ventas']
-        Unidad_Inventario = request.POST['Unidad_Inventario']
-        cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
-        Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
-        Porc_GastosVarios = request.POST['Porc_GastosVarios']
-        Porc_impuestos = request.POST['Porc_impuestos']
-
-        producto = Productos(
-            description = description,
-            codigo = codigo,
-            Unidad_Compras = Unidad_Compras,
-            Unidad_Ventas = Unidad_Ventas,
-            Unidad_Inventario = Unidad_Inventario,
-            cantidad_Unidad_Compras = cantidad_Unidad_Compras,
-            Cto_Unidad_Compras = Cto_Unidad_Compras,
-            Porc_GastosVarios = Porc_GastosVarios,
-            Porc_impuestos = Porc_impuestos
-        )
-        producto.save()
-        estado=True
-
-        context = {'estado':estado}
-        return redirect('Productos')
-
-    return render(request, 'add_producto.html', context)"""
-
 def delete_producto_view(request, id):
     articulo = Productos.objects.get(pk=id)
     articulo.delete()
 
     return redirect('Productos')
 
-def add_cliente_view(request):
+def add_cliente_view(request, cliente_id=None):
+
+    estado = dir_Estado.objects.all()
+    colonia = dir_Colonia.objects.all()
+    
+
+    if cliente_id:
+        cliente = Cliente.objects.get(id=cliente_id)
+        action = 'Editar Cliente'
+        title = 'Editar Cliente'
+    else:
+        cliente = None
+        action = 'Nuevo Cliente'
+        title = 'Nuevo Cliente'
 
     if request.method == 'POST':
-        formulario = AddCliente(request.POST)
 
-        if formulario.is_valid():
-            data_form = formulario.cleaned_data
+        _razon = request.POST['razon']
+        _rfc = request.POST['rfc']
+        _credito = request.POST['credito']
+        _limite_credito = request.POST['limite_credito']
+        _dias_credito = request.POST['dias_credito']
+        _lista_precios = request.POST['lista_precios']
+        _nombre_comercial = request.POST['nombre_comercial']
+        _dirEstado = request.POST['dirEstado']
+        _dirCiudad = request.POST['dirCiudad']
+        _dirColonia = request.POST['dirColonia']
+        _dircalle = request.POST['dircalle']
+        _dirnumint = request.POST['dirnumint']
+        _dirnumext = request.POST['dirnumext']
+        _telefono = request.POST['telefono']
 
-            razon = data_form['razon']
-            rfc = data_form['rfc']
-            credito = data_form['credito']
-            limite_credito = data_form['limite_credito']
-            dias_credito = data_form['dias_credito']
-            lista_precios = data_form['lista_precios']
-            nombre_comercial = data_form['nombre_comercial']
-            dirEstado = data_form['dirEstado']
-            dirCiudad = data_form['dirCiudad']
-            dirColonia = data_form['dirColonia']
-            dircalle = data_form['dircalle']
-            dirnumext = data_form['dirnumext']
-            dirnumint = data_form['dirnumint']
-            telefono = data_form['telefono']
-
-            cliente = Cliente(
-                razon = razon,
-                rfc = rfc,
-                credito = credito,
-                limite_credito = limite_credito,
-                dias_credito = dias_credito,
-                lista_precios = lista_precios,
-                nombre_comercial = nombre_comercial,
-                dirEstado = dirEstado,
-                dirCiudad = dirCiudad,
-                dirColonia = dirColonia,
-                dircalle = dircalle,
-                dirnumext = dirnumext,
-                dirnumint = dirnumint,
-                telefono = telefono
-            )
-        
+        if cliente:
+            cliente.razon = request.POST['razon']
+            cliente.rfc = request.POST['rfc']
+            cliente.credito = request.POST.get('credito')
+            cliente.limite_credito = request.POST['limite_credito']
+            cliente.dias_credito = request.POST['dias_credito']
+            cliente.lista_precios = request.POST['lista_precios']
+            cliente.nombre_comercial = request.POST['nombre_comercial']
+            cliente.dirEstado = request.POST['dirEstado']
+            cliente.dirCiudad = request.POST['dirCiudad']
+            cliente.dirColonia = request.POST['dirColonia']
+            cliente.dircalle = request.POST['dircalle']
+            cliente.dirnumint = request.POST['dirnumint']
+            cliente.dirnumext = request.POST['dirnumext']
+            cliente.telefono = request.POST['telefono']
+          
             cliente.save()
-            return redirect('Clientes')
+        else:
+            Cliente.objects.create(razon=_razon,
+                                   rfc = _rfc,
+                                   credito = _credito,
+                                   limite_credito = _limite_credito,
+                                   dias_credito = _dias_credito,
+                                   lista_precios = _lista_precios,
+                                   nombre_comercial = _nombre_comercial,
+                                   dirEstado = _dirEstado,
+                                   dirCiudad = _dirCiudad,
+                                   dirColonia = _dirColonia,
+                                   dircalle = _dircalle,
+                                   dirnumint = _dirnumint,
+                                   dirnumext = _dirnumext,
+                                   telefono = _telefono
+                                     )
+        
 
-    else:
-        formulario = AddCliente()
+        return redirect('Clientes')    
 
-    return render(request, 'add_clientes.html', {
-        'form' : formulario
-    })
-
-def edit_cliente_view(request, id):
-    pass
+    return render(request, 'add_cliente.html',{
+        'cliente': cliente,
+        'colonia' : colonia,
+        'estado' : estado, 
+        'action': action,
+        'title':title})
 
 def delete_cliente_view(request, id):
     cliente = Cliente.objects.get(pk=id)
@@ -133,36 +123,8 @@ def delete_cliente_view(request, id):
 
     return redirect('Clientes')
 
-"""def editar_producto(request, id):
-    if request.method == 'GET':
-        producto = Productos.objects.get(pk=id)
-        return render(request, 'editar.html', {'producto': producto})
-    return redirect('Productos')"""
-    
-
-"""def actualizar_producto(request, id):
-    if request.method == 'POST':
-        producto = Productos.objects.get(pk=id)
-        
-        producto.description = request.POST['description']
-        producto.codigo = request.POST['codigo']
-        producto.Unidad_Compras = request.POST['Unidad_Compras']
-        producto.Unidad_Ventas = request.POST['Unidad_Ventas']
-        producto.Unidad_Inventario = request.POST['Unidad_Inventario']
-        producto.cantidad_Unidad_Compras = request.POST['cantidad_Unidad_Compras']
-        producto.Cto_Unidad_Compras = request.POST['Cto_Unidad_Compras']
-        producto.Porc_GastosVarios = request.POST['Porc_GastosVarios']
-        producto.Porc_impuestos = request.POST['Porc_impuestos']
-        producto.Cto_Factura= request.POST['Cto_Factura']
-        producto.Cto_Integrado= request.POST['Cto_Integrado']
-
-        producto.save()
-
-        
-        return redirect('Productos')"""
-
-
 def add_producto_view(request, producto_id=None):
+
     unidadmedida = UnidadMedida.objects.all()
     moneda = Moneda.objects.all()
     
@@ -263,15 +225,18 @@ def add_producto_view(request, producto_id=None):
                                      codigo_prov=_codigo_prov,
                                      codigo_barras=_codigo_barras,
                                      )
-        
 
+        
         return redirect('Productos')    
+    
+    precios = TipoCambio.objects.order_by('-id').first().tc_precios if TipoCambio.objects.exists() else None   
 
     return render(request, 'add_producto.html',{
         'producto': producto, 
         'action': action,
         'unidad': unidadmedida,
         'moneda': moneda,
+        'precios' : precios,
         'title':title})
 
 def marca_view(request):
@@ -287,9 +252,11 @@ def add_marca_view(request, marca_id=None):
     if marca_id:
         marca = Marca.objects.get(id=marca_id)
         action = 'Editar Marca'
+        title = 'Editar Marca'
     else:
         marca = None
         action = 'Nueva Marca'
+        title = 'Nueva Marca'
 
     if request.method == 'POST':
         _description = request.POST['description']
@@ -304,6 +271,7 @@ def add_marca_view(request, marca_id=None):
     return render(request, 'add_marca.html',{
         'marca' : marca,
         'action' : action,
+        'title':title,
     })
 
 def delete_marca(request, id):
@@ -324,9 +292,11 @@ def add_proveedor_view(request, proveedor_id=None):
     if proveedor_id:
         proveedor = Proveedor.objects.get(id=proveedor_id)
         action = 'Editar Proveedor'
+        title = 'Editar Proveedor'
     else:
         proveedor = None
         action = 'Nuevo Proveedor'
+        title = 'Nuevo Proveedor'
 
     if request.method == 'POST':
         _description = request.POST['description']
@@ -341,6 +311,7 @@ def add_proveedor_view(request, proveedor_id=None):
     return render(request, 'add_proveedor.html',{
         'proveedor' : proveedor,
         'action' : action,
+        'title': title,
     })
 
 def delete_proveedor(request, id):
@@ -361,9 +332,11 @@ def add_familia_view(request, familia_id=None):
     if familia_id:
         familia = Familia.objects.get(id=familia_id)
         action = 'Editar Familia'
+        title = 'Editar Familia'
     else:
         familia = None
         action = 'Nueva Familia'
+        title = 'Nueva Familia'
 
     if request.method == 'POST':
         _description = request.POST['description']
@@ -379,6 +352,7 @@ def add_familia_view(request, familia_id=None):
     return render(request, 'add_familia.html',{
         'familia': familia,
         'action' : action,
+        'title': title,
     })
 
 def delete_familia(request, id):
@@ -400,9 +374,11 @@ def add_unidadmedida_view(request, unidadmedida_id=None):
     if unidadmedida_id:
         unidadmedida = UnidadMedida.objects.get(id=unidadmedida_id)
         action = 'Editar Unidad'
+        title = 'Editar Unidad'
     else:
         unidadmedida = None
         action = 'Nueva Unidad'
+        title = 'Nueva Unidad'
 
     if request.method == 'POST':
         _description = request.POST['description']
@@ -417,6 +393,7 @@ def add_unidadmedida_view(request, unidadmedida_id=None):
     return render(request, 'add_unidadmedida.html',{
         'unidadmedida' : unidadmedida,
         'action' : action,
+        'title': title,
     })
 
 def delete_unidadmedida(request, id):
@@ -438,9 +415,11 @@ def add_moneda_view(request, moneda_id=None):
     if moneda_id:
         moneda = Moneda.objects.get(id=moneda_id)
         action = 'Editar Moneda'
+        title = 'Editar Moneda'
     else:
         moneda = None
         action = 'Nueva Moneda'
+        title = 'Nueva Moneda'
 
     if request.method == 'POST':
         _description = request.POST['description']
@@ -455,6 +434,7 @@ def add_moneda_view(request, moneda_id=None):
     return render(request, 'add_moneda.html',{
         'moneda' : moneda,
         'action' : action,
+        'title': title,
     })
 
 def delete_moneda(request, id):
@@ -462,3 +442,62 @@ def delete_moneda(request, id):
     moneda.delete()
 
     return redirect('Moneda')
+
+def tipo_cambio_view(request):
+    tcambio = TipoCambio.objects.all()
+
+    return render(request, 'tipocambio.html', {
+        'tcambio' : tcambio,
+        'title': 'Tipo de Cambio'
+    })
+
+def add_tcambio_view(request, tcambio_id=None):
+
+    if tcambio_id:
+        tcambio = TipoCambio.objects.get(id=tcambio_id)
+        action = 'Editar Tipo de Cambio'
+        title = 'Editar Tipo de Cambio'
+    else:
+        tcambio = None
+        action = 'Nueva Tipo de Cambio'
+        title = 'Nueva Tipo de Cambio'
+
+    if request.method == 'POST':
+        _fecha = request.POST['fecha']
+        _tc_venta = request.POST['tc_venta']
+        _tc_compra = request.POST['tc_compra']
+        _tc_dof = request.POST['tc_dof']
+        _tc_precios = request.POST['tc_precios']
+        
+        if tcambio:
+            tcambio.fecha = request.POST['fecha']
+            tcambio.tc_venta = request.POST['tc_venta']
+            tcambio.tc_compra = request.POST['tc_compra']
+            tcambio.tc_dof = request.POST['tc_dof']
+            tcambio.tc_precios = request.POST['tc_precios']
+            tcambio.save()
+        else:
+            TipoCambio.objects.create(fecha= _fecha,
+                                      tc_venta= _tc_venta,
+                                      tc_compra= _tc_compra,
+                                      tc_dof = _tc_dof,
+                                      tc_precios = _tc_precios)
+
+        return redirect('TipoCambio') 
+    return render(request, 'add_tcambio.html',{
+        'tcambio' : tcambio,
+        'action' : action,
+        'title': title,
+    })
+
+def delete_tcambio(request, id):
+    tcambio = TipoCambio.objects.get(pk=id)
+    tcambio.delete()
+
+    return redirect('TipoCambio')
+
+
+def cargar_ciudades(request):
+    estado_id = request.GET.get('estado_id')
+    ciudades = dir_Ciudad.objects.filter(id_dirEstado=estado_id).all()
+    return JsonResponse(list(ciudades.values('id', 'nombre')), safe=False)

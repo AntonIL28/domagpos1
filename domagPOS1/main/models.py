@@ -7,12 +7,20 @@ class dir_Estado(models.Model):
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=3)
 
+    class Meta:
+        verbose_name = 'Estado'
+        verbose_name_plural = 'Estados'
+
     def __str__(self):
         return self.nombre
     
 class dir_Ciudad(models.Model):
     nombre = models.CharField(max_length=100)
     id_dirEstado = models.ForeignKey(dir_Estado, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Ciudad'
+        verbose_name_plural = 'Ciudades'
 
     def __str__(self):
         return self.nombre
@@ -22,6 +30,10 @@ class dir_Colonia(models.Model):
     cod_postal = models.IntegerField(default='', blank=True)
     id_dirCiudad = models.ForeignKey(dir_Ciudad, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Colonia'
+        verbose_name_plural = 'Colonias'
+
     def __str__(self):
         return self.nombre
 
@@ -30,9 +42,9 @@ class Cliente(models.Model):
     razon = models.CharField(max_length=200, null=False)
     rfc = models.CharField(max_length=13, null= False)
     credito = models.BooleanField(default=False)
-    limite_credito = models.DecimalField(default=0, decimal_places=2, max_digits=8)
+    limite_credito = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     dias_credito = models.IntegerField(default=0)
-    lista_precios = models.IntegerField(default=1)
+    lista_precios = models.IntegerField(default="")
     nombre_comercial = models.CharField(max_length=200, null=True)
     dirEstado = models.CharField(max_length=200, null=True)
     dirCiudad = models.CharField(max_length=200, null=True)
@@ -65,7 +77,6 @@ class Productos(models.Model):
     Porc_impuestos = models.DecimalField(max_digits=15, decimal_places=2, null=False)
     Cto_Integrado = models.DecimalField(max_digits=15, decimal_places=4, null=False)
     moneda = models.CharField(max_length=50, null=False, default="")
-    t_cambio = models.DecimalField(max_digits=15, decimal_places=2, null=False, default="0.00")
     precio1 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
     precio2 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
     precio3 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
@@ -81,6 +92,7 @@ class Productos(models.Model):
     precioMN3 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
     precioMN4 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
     precioMN5 = models.DecimalField(max_digits=15, decimal_places=4, null=False, default="0.0000")
+    t_cambio = models.DecimalField(max_digits=8, decimal_places=4, null=False, default="0.0000")
     codigo_prov = models.CharField(max_length=200, null=False, default="")
     codigo_barras = models.CharField(max_length=200, null=False, default="")
     created = models.DateTimeField(auto_now_add=True)
@@ -136,9 +148,10 @@ class UnidadMedida(models.Model):
     
 class TipoCambio(models.Model):
     fecha = models.DateField()
-    tc_venta = models.DecimalField(max_digits=8, decimal_places=2, null=False, default="0.00")
-    tc_compra = models.DecimalField(max_digits=8, decimal_places=2, null=False, default="0.00")
-    tc_dof = models.DecimalField(max_digits=8, decimal_places=2, null=False, default="0.00")
+    tc_venta = models.DecimalField(max_digits=8, decimal_places=4, null=False, default="0.0000")
+    tc_compra = models.DecimalField(max_digits=8, decimal_places=4, null=False, default="0.0000")
+    tc_dof = models.DecimalField(max_digits=8, decimal_places=4, null=False, default="0.0000")
+    tc_precios = models.DecimalField(max_digits=8, decimal_places=4, null=False, default="0.0000")
 
     class Meta:
         verbose_name = 'Tipo de cambio'

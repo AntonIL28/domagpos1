@@ -1,0 +1,45 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<style>
+    button{
+        margin-left: 430px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<a href="{% url 'AddTipoCambio' %}" ><button type="button" id="guardar_addp">Agregar Tipo de Cambio</button></a>
+
+<table class="tabla_ventas">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Compra</th>
+            <th>Venta</th>
+            <th>DOF</th>
+            <th>Precios</th>
+            <th>Opcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for t in tcambio  %}
+        <tr class="product_td">
+            <td>{{t.id}}</td>
+            <td>{{t.fecha}}</td>
+            <td>{{t.tc_venta}}</td>
+            <td>{{t.tc_compra}}</td>
+            <td>{{t.tc_dof}}</td>
+            <td>{{t.tc_precios}}</td>
+            <td><a href="{% url 'EditTipoCambio' t.id %}">Editar</a></td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>      
+{% endblock content %}

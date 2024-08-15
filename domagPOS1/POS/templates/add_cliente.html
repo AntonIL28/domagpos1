@@ -1,0 +1,150 @@
+{% extends "layoutPOS.html" %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+
+<div id="content_form_addclientes">
+    <form method="POST" id="wrapper_clientes">
+
+        {% csrf_token %}
+        <div class="head_addc">
+            <div id="content_general">
+                <div id="razon">
+                <label for="razon"><strong>Razon</strong></label>
+                <input type="text" id="razon" name="razon" value="{% if cliente %}{{ cliente.razon }}{% endif %}"required>
+                </div>
+
+                <div id="rfc">
+                <label for="rfc"><strong>RFC</strong></label>
+                <input type="text" id="rfc" name="rfc" value="{% if cliente %}{{ cliente.rfc }}{% endif %}"required>
+                </div>
+
+                <div id="nom_comercial">
+                <label for="nombre_comercial"><strong>Nombre comercial</strong></label>
+                <input type="text" id="nom_comercial" name="nombre_comercial" value="{% if cliente %}{{ cliente.nombre_comercial }}{% endif %}"required>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="center_content_addc">
+            <div class="body_addc">
+                <div class="content_body_addc">
+                    <h1 class="title_addc">Creditos</h1>
+        
+                    <div id="justify_compras">
+                        <label class="" for="credito">Credito</label>
+                        <select class="" type="text" name="credito">
+                            <option value="True">Si</option>
+                            <option value="False">No</option>
+                            {% for i in unit %}
+                            <option {% if cliente.credito == i.id %}selected{% endif %} value="{{i.id}}">{{i.credito}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+
+                        <label class="" for="limite_credito">Limite de credito</label>
+                        <input type="number" name="limite_credito" value="{% if cliente %}{{ cliente.limite_credito }}{% endif %}">
+
+                        <label class="" for="dias_credito">Dias credito</label>
+                        <input type="number" name="dias_credito" value="{% if cliente %}{{ cliente.dias_credito }}{% endif %}">
+
+                        <label class="" for="lista_precios">Lista de precios</label>
+                        <input type="number" name="lista_precios" value="{% if cliente %}{{ cliente.lista_precios }}{% endif %}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer_addc">
+                <h1 class="title_addc" style="display:block;">Direccion</h1>
+                <br>
+
+                <div class="content_footer_addc">
+                    <div class="north_footer">
+                        <label for="dirEstado">Estado</label>
+                        <select type="text" id="estado" name="dirEstado">
+                            <option value="">Selecciona un estado</option>
+                            {% for i in estado %}
+                            <option {% if cliente.dirEstado == i.id %}selected{% endif %} value="{{i.id}}">{{i.codigo}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+
+                        <label for="dirCiudad">Ciudad</label>
+                        <select type="text" id="ciudad" name="dirCuidad">
+                            <option value="">Selecciona una ciudad</option>
+                        </select>
+                        <br>
+
+                        <label for="dirColonia">Colonia</label>
+                        <input type="text" name="dirColonia" value="{% if cliente %}{{ cliente.dirColonia }}{% endif %}">
+                        <br>
+
+                        <label for="dircalle">Calle</label>
+                        <input type="text" name="dircalle" value="{% if cliente %}{{ cliente.dircalle }}{% endif %}">
+                        <br>
+                    </div>
+
+                    <div class="soft_footer">
+                        <label for="dirnumint">Numero Interior</label>
+                        <input type="text" name="dirnumint" value="{% if cliente %}{{ cliente.dirnumint }}{% endif %}">
+                        <br>
+
+                        <label for="dirnumext">Numero Exterior</label>
+                        <input type="text" name="dirnumext" value="{% if cliente %}{{ cliente.dirnumext }}{% endif %}">
+                        <br>
+
+                        <label for="telefono">Telefono</label>
+                        <input type="text" name="telefono" value="{% if cliente %}{{ cliente.telefono }}{% endif %}">
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control_addp1">
+            <a href="{% url 'Clientes' %}"><button id="regresar_addp" type="button">Regresar</button></a>
+            <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
+            {% if cliente %}
+                <div>
+                    <a href="{% url 'DeleteCliente' cliente.id %}"><button type="button" class="delete_producto_button">Eliminar</button></a>
+                </div>
+            {% endif %}
+        </div>
+                 
+    </form>
+ 
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!--Logica de Estados-->
+<script type="text/javascript">
+
+    $('#estado').change(function(){
+        var estadoId = $(this).val();
+        if (estadoId) {
+            $.ajax({
+                url: '{% url "cargar_ciudades" %}',
+                data: {
+                    'estado_id': estadoId
+                },
+                success: function(data) {
+                    $('#ciudad').empty();
+                    $('#ciudad').append('<option value="">Selecciona una ciudad</option>');
+                    $.each(data, function(key, value) {
+                        $('#ciudad').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#ciudad').empty();
+            $('#ciudad').append('<option value="">Selecciona una ciudad</option>');
+        }
+    });
+</script>
+
+{% endblock content %}
+
+
