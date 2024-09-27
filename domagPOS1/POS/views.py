@@ -10,13 +10,13 @@ from django.utils import timezone
 import os
 
 def POS(request):
-    articulo = Article.objects.all()
+    producto = Productos.objects.all()
     clientes = Cliente.objects.all()
 
     return render(request, 'POScopy.html', {
         'title':'Punto de Venta',
         'clientes': clientes,
-        'articulo': articulo,
+        'producto': producto,
     })
 
 def clientes_view(request):
@@ -496,8 +496,24 @@ def delete_tcambio(request, id):
 
     return redirect('TipoCambio')
 
-
 def cargar_ciudades(request):
     estado_id = request.GET.get('estado_id')
     ciudades = dir_Ciudad.objects.filter(id_dirEstado=estado_id).all()
     return JsonResponse(list(ciudades.values('id', 'nombre')), safe=False)
+
+def buscar_productos(request):
+    query = request.GET.get('q', '')
+    productos = Productos.objects.filter(description__icontains=query)
+    data = list(productos.values('id', 'description', 'precioMN1'))
+    return JsonResponse(data, safe=False)
+
+def buscar_cliente(request):
+    query = request.GET.get('q', '')
+
+    if query:
+        clientes = Cliente.objects.filter(razon__icontains=query) | Cliente.objects.filter(telefono__icontains=query)
+    else:
+        clientes = Cliente.objects.none()
+
+    clientes_data = list(clientes.values('id', 'razon', 'telefono'))
+    return JsonResponse(clientes_data, safe=False)

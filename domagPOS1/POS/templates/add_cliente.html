@@ -66,7 +66,7 @@
                         <select type="text" id="estado" name="dirEstado">
                             <option value="">Selecciona un estado</option>
                             {% for i in estado %}
-                            <option {% if cliente.dirEstado == i.id %}selected{% endif %} value="{{i.id}}">{{i.codigo}}</option>
+                            <option {% if cliente.dirEstado == i.id %}selected{% endif %} value="{{i.codigo}}">{{i.codigo}}</option>
                             {% endfor %}
                         </select>
                         <br>

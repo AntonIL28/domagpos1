@@ -4,11 +4,35 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
+
+<style>
+    .table_venta{
+        background: #ffffff;
+        border: 2px solid #000000;
+        width: 1300px;
+        margin: 0 auto;
+    }
+
+    thead{
+        background:aqua;
+    }
+
+    .head_modal{
+        margin-bottom: 15px;
+    }
+
+    #buscar-producto{
+        margin-bottom: 10px;
+    }
+</style>
+
 <div class="control_POS">
-    <div class="boton_POS" onmouseout="toggleDiv_clientes()">
-        <a href="#"><i class="fa-solid fa-users"></i></a>
-        <a href="#"><p class="pie_POS">Agregar Clientes</p></a>
-    </div>
+    <button id="AgregarCliente" style="background: none; border: none;">
+        <div class="boton_POS">
+            <i class="fa-solid fa-users"></i>
+            <p class="pie_POS">Agregar Clientes</p>
+        </div>
+    </button>
 
     <div class="boton_POS">
         <a href="#"><i class="fa-solid fa-check"></i></a>
@@ -66,5 +90,197 @@
     </div>
 </div>
 
+<dialog id="modal">
+    <h3 class="head_modal">Agregar Clientes</h3>
+    <input type="text" id="buscar-cliente" placeholder="Buscar cliente...">
+    <table style="min-height: 200px;" class="table_venta" id="table_cliente">
+        <thead>
+            <th style="width: 60px;">Codigo</th>
+            <th style="width: 300px;">Razon</th>
+            <th style="width: 100px;">Telefono</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <br>
+    <button id="CerrarModalCliente">Cerrar</button>
+</dialog>
+
+<div class="flexContainer">
+    <div class="container_head">
+        <div class="cliente_id">
+            <label for="">#Cliente</label>
+            <div class="span_cliente"></div>
+        </div>
+        <div class="razon">
+            <label for="">Razon/Nombre Comercial</label>
+            <div class="span_razon"></div>
+        </div>
+        <div class="rfc">
+            <label for="">R.F.C</label>
+            <div class="span_rfc"></div>
+        </div>
+        <div class="condiciones">
+            <label for="">Condiciones</label>
+            <div class="span_condiciones"></div>
+        </div>
+        <div class="plazo">
+            <label for="">Plazo</label>
+            <div class="span_plazo"></div>
+        </div>
+    </div>
+
+    <div class="container_body">
+        <div class="credit_container">
+            <div class="limcredito">
+                <label for="">Limite Credito</label>
+                <div class="span_limcredito"></div>
+            </div>
+            <div class="saldo">
+                <label for="">Saldo</label>
+                <div class="span_saldo"></div>
+            </div>
+            <div class="cdisponible">
+                <label for="">Credito Disponible</label>
+                <div class="span_cdisponible"></div>
+            </div>
+            <div class="ocompra">
+                <label for="">Orden Compra</label>
+                <div class="ocompra_dos">
+                    <div class="span_ocompra" style="margin-right: 5px;"></div>
+                    <input type="button" style="height: 25px; width: 25px;"> 
+                </div>
+                
+            </div>
+            <div class="cuenta">
+                <label for="">Cuenta</label>
+                <div class="span_cuenta"></div>
+            </div>
+        </div>
+        
+
+        <div class="trabajo_container">
+            <div class="otrabajo">
+                <label for="">Orden de trabajo</label>
+                <div class="span_otrabajo"></div>
+            </div>
+            <div class="tecnico">
+                <label for="">Tecnico</label>
+                <div class="span_tecnico"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container_footer">
+        <div class="scanner_container">
+           <div class="scanner">
+                <label>Escanear Producto</label> 
+                <br>
+                <input type="text" class="span_scanner">
+            </div>
+            <div class="buscar_producto">
+                <button style="width: 100px; height: 50px;">BUSCAR PRODUCTO</button>
+            </div> 
+        </div>
+
+        <div class="tarjeta_container">
+            <div class="tarjeta">
+                <label for="">Tarjerta</label>
+                <div class="span_tarjeta"></div>
+            </div>
+            <div class="programa">
+                <label for="">Programa</label>
+                <div class="span_programa"></div>
+            </div>
+            <div>
+                <div class="apuntos">
+                    <input type="checkbox">
+                    <label for="">Aplicar Puntos</label>
+                    <div class="span_apuntos"></div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <table class="table_venta">
+        <thead>
+            <tr>
+                <th style="width: 90px;">Cantidad</th>
+                <th style="width: 60px;">Unidad</th>
+                <th style="width: 150px;">Codigo</th>
+                <th style="width: 500px;">Descripcion</th>
+                <th style="width: 100px;">Precio Unit</th>
+                <th style="width: 100px;">Importe</th>
+                <th style="width: 60px;">P</th>
+                <th style="width: 60px;">CE</th>
+                <th style="width: 100px;">% IVA</th>
+                <th style="width: 100px;">IVA</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const AgregarCliente= document.querySelector("#AgregarCliente");
+    const CerrarModalCliente= document.querySelector("#CerrarModalCliente");
+    const Modal= document.querySelector("#modal");
+
+    AgregarCliente.addEventListener("click",()=>{
+        Modal.showModal();
+    })
+
+    CerrarModalCliente.addEventListener("click",()=>{
+        Modal.close();
+    })
+</script>
+
+
+<script>
+    document.getElementById("buscar-cliente").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            buscarCliente();
+        }
+    });
+    
+    function buscarCliente() {
+        const query = document.getElementById("buscar-cliente").value;
+    
+        fetch(`/buscar_cliente/?q=` + encodeURIComponent(query))
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector("#table_cliente tbody");
+                tableBody.innerHTML = "";
+    
+                data.forEach(cliente => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td style="width: 60px; text-align: center; height: 10px;">${cliente.id}</td>
+                        <td style="width: 300px; text-align: center; height: 10px;">${cliente.razon}</td>
+                        <td style="width: 100px; text-align: center; height: 10px;">${cliente.telefono}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            });
+    }
+    </script>
 
 {% endblock content %} 

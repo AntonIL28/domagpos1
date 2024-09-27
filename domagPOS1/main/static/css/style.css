@@ -876,3 +876,273 @@ footer{
     margin-bottom: 30px;
     width: 58%;
 }
+
+/*Punto de venta*/
+
+/*contenedor general*/
+.flexContainer{
+    width: 1300px;
+    height: 250px;
+    margin-left: 100px;
+    padding-top: 10px;
+}
+
+/*primer contenedor*/
+.container_head{
+    width: 1300px;
+    height: 50px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.cliente_id{
+    margin-left: 20px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.razon{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.rfc{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.condiciones{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.plazo{
+    margin-left: 10px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.span_cliente{
+    width: 150px;
+    height: 25px;
+    background: #ffffff;
+    border: 1px solid #000000;
+}
+.span_razon{
+    width: 500px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+.span_rfc{
+    width: 200px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+.span_plazo{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+.span_condiciones{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+/*segundo contenedor*/
+.container_body{
+    width: 1300px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.credit_container{
+    display: flex;
+}
+
+.trabajo_container{
+    display: flex;
+}
+
+.span_limcredito{
+    width: 100px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_saldo{
+    width: 100px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_cdisponible{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_ocompra{
+    width: 100px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_cuenta{
+    width: 100px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_otrabajo{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_tecnico{
+    width: 250px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.limcredito{
+    margin-left: 30px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.saldo{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center; 
+}
+
+.cdisponible{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center; 
+}
+
+.ocompra{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.ocompra_dos{
+    display: flex;
+}
+
+.cuenta{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.otrabajo{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.tecnico{
+    margin-left: 10px;
+    margin-right: 30px;
+    text-align: center;
+}
+
+/*tercer contenedor*/
+.container_footer{
+    width: 1300px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.scanner_container{
+    display: flex;
+}
+
+.tarjeta_container{
+    display: flex;
+}
+
+.span_scanner{
+    height: 25px;
+    border: 1px solid #000000;
+}
+
+.span_tarjeta{
+    width: 250px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_programa{
+    width: 250px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.span_apuntos{
+    width: 120px;
+    height: 25px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+.scanner{
+    margin-left: 20px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.tarjeta{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.programa{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.apuntos{
+    margin-left: 10px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+
+/*MODAL*/
+#modal{
+    margin: 0 auto;
+    top: 20%;
+    padding: 20px;
+}
+
+#modal::backdrop{
+    background-color: rgba(0, 0, 0, .55)
+}
