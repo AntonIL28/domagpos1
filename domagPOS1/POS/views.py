@@ -43,7 +43,7 @@ def delete_producto_view(request, id):
 
 def add_cliente_view(request, cliente_id=None):
 
-    estado = dir_Estado.objects.all()
+    estado = dir_Estado.objects.all().order_by('nombre')
     colonia = dir_Colonia.objects.all()
     
 
@@ -495,11 +495,6 @@ def delete_tcambio(request, id):
     tcambio.delete()
 
     return redirect('TipoCambio')
-
-def cargar_ciudades(request):
-    estado_id = request.GET.get('estado_id')
-    ciudades = dir_Ciudad.objects.filter(id_dirEstado=estado_id).all()
-    return JsonResponse(list(ciudades.values('id', 'nombre')), safe=False)
 
 def buscar_productos(request):
     query = request.GET.get('q', '')

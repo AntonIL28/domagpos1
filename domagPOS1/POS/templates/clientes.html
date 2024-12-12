@@ -4,58 +4,129 @@
 
 {% block content %}
 
-<a href="{% url 'AddCliente' %}" ><button type="submit" class="agregar_cliente">Agregar Cliente</button></a>
+<style>
+    .clientes_table{
+        border: 2px solid #979797;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        background: #ffffff;
+        text-align: left;
+    }
 
-<div class="box_tabla">
-    <div class="botones_clientes">
-        <div class="control_clientes">
-            <button type="button" class="control_btn_clientes">CSV</button>
-            <button type="button" class="control_btn_clientes">Imprimir</button>
-        </div>
-        <div class="control">
-            <label>Buscar</label>
-            <input type="text">
-        </div>
-    </div>   
-    <table class="tabla_ventas">
-        <thead>
-            <tr>
-                <th>Razon</th>
-                <th>RFC</th>
-                <th>Credito</th>
-                <th>Limite de credito</th>
-                <th>Dias de credito</th>
-                <th>L. Precios</th>
-                <th>Nombre Comercial</th>
-                <th>Colonia</th>
-                <th>Calle</th>
-                <th>No. Exterior</th>
-                <th>No. Interior</th>
-                <th>Telefono</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
+    .container{
+        display: flex;
+        justify-content: center;
+        margin-left: 100px;
+        margin-right: 100px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
-        <tbody >
-            {% for i in clientes %}
-            <tr class="product_td">
-                <td>{{i.razon}}</td>
-                <td>{{i.rfc}}</td>
-                <td>{{i.credito}}</td>
-                <td>{{i.limite_credito}}</td>
-                <td>{{i.dias_credito}}</td>
-                <td>{{i.lista_precios}}</td>
-                <td>{{i.nombre_comercial}}</td>
-                <td>{{i.dirColonia}}</td>
-                <td>{{i.dircalle}}</td>
-                <td>{{i.dirnumext}}</td>
-                <td>{{i.dirnumint}}</td>
-                <td>{{i.telefono}}</td>
-                <td><a href="{% url 'EditCliente' i.id %}">Editar</a></td>
-            </tr>
-            {% endfor %}  
-        </tbody>
-    </table>
-</div>      
+    .id{
+        width: 50px;
+        text-align: left;
+    }
+    
+    .razon{
+        width: 500px;
+        text-align: left;
+    }
+
+    .rfc{
+        width: 150px;
+        text-align: left;
+    }
+    
+    .name_comer{
+        width: 300px;
+        text-align: left;
+    }
+
+    .options{
+        width: 100px;
+        text-align: left;
+    }
+
+    .container_control{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .container_query{
+        margin-bottom: 20px;
+    }
+
+    .boton_add{
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+    }
+
+    .boton{
+        width: 100px;
+        height: 30px;
+        border-radius: 10px;
+    }
+
+    .boton:hover, 
+    .boton_add:hover{
+        cursor: pointer;
+        background:rgb(77, 77, 246);
+        color: white;
+        transition: all 300ms;
+    }
+    
+</style>
+
+<div class="container">
+    <div class="">
+        <div class="container_query">
+            <div class="query">
+                <label>Buscar</label>
+                <input type="text">
+            </div>
+        </div>
+
+        <table class="clientes_table">
+            <thead>
+                <tr>
+                    <th class="id">ID</th>
+                    <th class="razon">Razon</th>
+                    <th class="rfc">RFC</th>
+                    <th class="name_comer">Nombre Comercial</th>
+                    <th class="options">Opciones</th>
+                </tr>
+            </thead>
+    
+            <tbody >
+                {% for i in clientes %}
+                <tr class="product_td">
+                    <td>{{i.id}}</td>
+                    <td>{{i.razon}}</td>
+                    <td>{{i.rfc}}</td>
+                    <td>{{i.nombre_comercial}}</td>
+                    <td><a href="{% url 'EditCliente' i.id %}">Editar</a></td>
+                </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+    
+        <div class="container_control">
+            <div class="button_add_cliente">
+                <a href="{% url 'AddCliente' %}" ><button type="submit" class="boton_add">Agregar Cliente</button></a>
+            </div>
+            
+            <div class="cvs_and_print">
+                <button type="button" class="boton">CSV</button>
+                <button type="button" class="boton">Imprimir</button>
+            </div>
+        </div>
+    </div>
+</div>
+      
 
 {% endblock content %} 

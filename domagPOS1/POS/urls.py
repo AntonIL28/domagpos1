@@ -36,7 +36,6 @@ urlpatterns = [
     path('add_tipo-cambio/', views.add_tcambio_view, name="AddTipoCambio"),
     path('edit_tipo-cambio/<int:tcambio_id>', views.add_tcambio_view, name="EditTipoCambio"),
     path('delete_tipo-cambio/<int:id>', views.delete_tcambio, name="DeleteTipoCambio"),
-    path('cargar-ciudades/', views.cargar_ciudades, name='cargar_ciudades'),
     path('buscar-productos/', views.buscar_productos, name='buscar_productos'),
     path('buscar_cliente/', views.buscar_cliente, name='buscar_cliente'),
     

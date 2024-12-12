@@ -16,7 +16,7 @@ class dir_Estado(models.Model):
     
 class dir_Ciudad(models.Model):
     nombre = models.CharField(max_length=100)
-    id_dirEstado = models.ForeignKey(dir_Estado, on_delete=models.CASCADE)
+    id_dirEstado = models.CharField(max_length=100)
 
     class Meta:
         verbose_name = 'Ciudad'
@@ -28,7 +28,7 @@ class dir_Ciudad(models.Model):
 class dir_Colonia(models.Model):
     nombre = models.CharField(max_length=100)
     cod_postal = models.IntegerField(default='', blank=True)
-    id_dirCiudad = models.ForeignKey(dir_Ciudad, on_delete=models.CASCADE)
+    id_dirCiudad =models.CharField(max_length=100)
 
     class Meta:
         verbose_name = 'Colonia'

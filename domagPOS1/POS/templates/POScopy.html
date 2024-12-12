@@ -5,32 +5,16 @@
 
 {% block content %}
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-    .table_venta{
-        background: #ffffff;
-        border: 2px solid #000000;
-        width: 1300px;
-        margin: 0 auto;
-    }
-
-    thead{
-        background:aqua;
-    }
-
-    .head_modal{
-        margin-bottom: 15px;
-    }
-
-    #buscar-producto{
-        margin-bottom: 10px;
-    }
+    
 </style>
 
 <div class="control_POS">
     <button id="AgregarCliente" style="background: none; border: none;">
         <div class="boton_POS">
             <i class="fa-solid fa-users"></i>
-            <p class="pie_POS">Agregar Clientes</p>
+            <p class="pie_POS">Clientes</p>
         </div>
     </button>
 
@@ -91,13 +75,13 @@
 </div>
 
 <dialog id="modal">
-    <h3 class="head_modal">Agregar Clientes</h3>
+    <h3 class="head_modal">Clientes</h3>
     <input type="text" id="buscar-cliente" placeholder="Buscar cliente...">
     <table style="min-height: 200px;" class="table_venta" id="table_cliente">
         <thead>
             <th style="width: 60px;">Codigo</th>
             <th style="width: 300px;">Razon</th>
-            <th style="width: 100px;">Telefono</th>
+            <th style="width: 100px;">RFC</th>
         </thead>
         <tbody></tbody>
     </table>
@@ -109,15 +93,15 @@
     <div class="container_head">
         <div class="cliente_id">
             <label for="">#Cliente</label>
-            <div class="span_cliente"></div>
+            <div class="span_cliente" id="detalleId"></div>
         </div>
         <div class="razon">
             <label for="">Razon/Nombre Comercial</label>
-            <div class="span_razon"></div>
+            <div class="span_razon" id="detalleNombre"></div>
         </div>
         <div class="rfc">
             <label for="">R.F.C</label>
-            <div class="span_rfc"></div>
+            <div class="span_rfc" id="detalleRFC"></div>
         </div>
         <div class="condiciones">
             <label for="">Condiciones</label>
@@ -252,7 +236,6 @@
     })
 </script>
 
-
 <script>
     document.getElementById("buscar-cliente").addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
@@ -275,12 +258,26 @@
                     row.innerHTML = `
                         <td style="width: 60px; text-align: center; height: 10px;">${cliente.id}</td>
                         <td style="width: 300px; text-align: center; height: 10px;">${cliente.razon}</td>
-                        <td style="width: 100px; text-align: center; height: 10px;">${cliente.telefono}</td>
+                        <td style="width: 100px; text-align: center; height: 10px;">${cliente.rfc}</td>
                     `;
                     tableBody.appendChild(row);
                 });
             });
     }
-    </script>
+</script>
+
+<script> 
+    $(document).ready(function() {
+         $('#table_cliente tbody tr').click(function() {
+             var id = $(this).data('id'); 
+             var razon = $(this).find('td').eq(1).text(); 
+             var rfc = $(this).find('td').eq(2).text(); 
+             
+             $('#detalleId').text(id); 
+             $('#detalleNombre').text(razon); 
+             $('#detalleRFC').text(rfc); 
+        }); 
+    }); 
+</script>
 
 {% endblock content %} 

@@ -211,7 +211,6 @@ div.pie{
 }
 
 .tabla_clientes th{
-    width: 150px;
     border-bottom: 2px solid #979797;
 }
 
@@ -294,7 +293,6 @@ div.pie{
 }
 
 .tabla_ventas th{
-    width: 200px;
     border-bottom: 2px solid #979797;
 }
 
@@ -1145,4 +1143,8 @@ footer{
 
 #modal::backdrop{
     background-color: rgba(0, 0, 0, .55)
+}
+
+#estado{
+    width: 300px;
 }

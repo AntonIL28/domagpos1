@@ -63,18 +63,16 @@
                 <div class="content_footer_addc">
                     <div class="north_footer">
                         <label for="dirEstado">Estado</label>
-                        <select type="text" id="estado" name="dirEstado">
+                        <select type="text" id="estado" name="dirEstado" value="{% if cliente %}{{ cliente.dirEstado }}{% endif %}">
                             <option value="">Selecciona un estado</option>
                             {% for i in estado %}
-                            <option {% if cliente.dirEstado == i.id %}selected{% endif %} value="{{i.codigo}}">{{i.codigo}}</option>
+                            <option {% if cliente.dirEstado == i.id %}selected{% endif %} value="{{i.nombre}}">{{i.nombre}}</option>
                             {% endfor %}
                         </select>
                         <br>
 
                         <label for="dirCiudad">Ciudad</label>
-                        <select type="text" id="ciudad" name="dirCuidad">
-                            <option value="">Selecciona una ciudad</option>
-                        </select>
+                        <input type="text" name="dirCiudad" value="{% if cliente %}{{ cliente.dirCiudad }}{% endif %}">
                         <br>
 
                         <label for="dirColonia">Colonia</label>
@@ -120,30 +118,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <!--Logica de Estados-->
-<script type="text/javascript">
-
-    $('#estado').change(function(){
-        var estadoId = $(this).val();
-        if (estadoId) {
-            $.ajax({
-                url: '{% url "cargar_ciudades" %}',
-                data: {
-                    'estado_id': estadoId
-                },
-                success: function(data) {
-                    $('#ciudad').empty();
-                    $('#ciudad').append('<option value="">Selecciona una ciudad</option>');
-                    $.each(data, function(key, value) {
-                        $('#ciudad').append('<option value="' + value.id + '">' + value.nombre + '</option>');
-                    });
-                }
-            });
-        } else {
-            $('#ciudad').empty();
-            $('#ciudad').append('<option value="">Selecciona una ciudad</option>');
-        }
-    });
-</script>
 
 {% endblock content %}
 
