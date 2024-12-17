@@ -84,14 +84,7 @@
 
 <div class="container">
     <div class="">
-        <div class="container_query">
-            <div class="query">
-                <label>Buscar</label>
-                <input type="text">
-            </div>
-        </div>
-
-        <table class="clientes_table">
+        <table id="tabla-clientes_view" class="clientes_table">
             <thead>
                 <tr>
                     <th class="id">ID</th>
@@ -127,6 +120,27 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!--Datatables-->
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function ($) {
+       $('#tabla-clientes_view').DataTable({
+        "language":{
+            "decimal": ".",
+            "thousands": ",",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron coincidencias",
+        },
+        "paging": false,
+        "info": false, 
+        "lengthChange": false,
+       });
+    });
+</script>
       
 
 {% endblock content %} 

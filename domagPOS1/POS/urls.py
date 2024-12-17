@@ -36,9 +36,6 @@ urlpatterns = [
     path('add_tipo-cambio/', views.add_tcambio_view, name="AddTipoCambio"),
     path('edit_tipo-cambio/<int:tcambio_id>', views.add_tcambio_view, name="EditTipoCambio"),
     path('delete_tipo-cambio/<int:id>', views.delete_tcambio, name="DeleteTipoCambio"),
-    path('buscar-productos/', views.buscar_productos, name='buscar_productos'),
-    path('buscar_cliente/', views.buscar_cliente, name='buscar_cliente'),
-    
     #path('actualizar_producto/<int:id>', views.actualizar_producto, name="ActualizarProducto"),
     #path('export/', views.export_pdf_view, name="ExportPDF" ),
     #path('export/<id>/<iva>', views.export_pdf_view, name="ExportPDF" ),

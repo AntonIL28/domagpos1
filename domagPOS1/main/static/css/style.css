@@ -456,6 +456,7 @@ footer{
     text-align: center;
     margin-left: 5px;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .fa-solid{
@@ -1137,8 +1138,15 @@ footer{
 /*MODAL*/
 #modal{
     margin: 0 auto;
-    top: 20%;
+    top: 10%;
     padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    height: 80%;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
 }
 
 #modal::backdrop{
@@ -1147,4 +1155,14 @@ footer{
 
 #estado{
     width: 300px;
+}
+
+/*Espaciado de datatables y search*/
+.dataTables_filter {
+    margin-bottom: 25px;
+}
+
+/*Datatale clientes*/
+#tabla-clientes{
+    width: 80%;
 }

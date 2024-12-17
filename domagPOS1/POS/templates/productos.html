@@ -84,18 +84,15 @@
         color: white;
         transition: all 300ms;
     }
+
+    #modalCantidad{
+        display: none;
+    }
 </style>
 
 <div class="container">
     <div class="">
-        <div class="container_query">
-            <div class="query">
-                <label>Buscar</label>
-                <input type="text">
-            </div>
-        </div>
-
-        <table class="productos_table">
+        <table id="tabla-productos" class="productos_table">
             <thead>
                 <tr>
                     <th class="id">ID</th>
@@ -112,7 +109,7 @@
                 <tr class="product_td">
                     <td>{{producto.id}}</td>
                     <td>{{producto.codigo}}</td>
-                    <td >{{producto.description}}</td>
+                    <td>{{producto.description}}</td>
                     <td>{{producto.Cto_Factura}}</td>
                     <td>{{producto.Cto_Integrado}}</td>
                     <td><a href="{% url 'EditarProducto' producto.id %}">Editar</a></td>
@@ -133,6 +130,26 @@
         </div>
     </div>
 </div>
-      
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!--Datatables-->
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function ($) {
+       $('#tabla-productos').DataTable({
+        "language":{
+            "decimal": ".",
+            "thousands": ",",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron coincidencias",
+        },
+        "paging": false,
+        "info": false, 
+        "lengthChange": false,
+       });
+    });
+</script>
  
 {% endblock content %} 

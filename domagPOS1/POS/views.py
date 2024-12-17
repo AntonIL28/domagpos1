@@ -496,19 +496,3 @@ def delete_tcambio(request, id):
 
     return redirect('TipoCambio')
 
-def buscar_productos(request):
-    query = request.GET.get('q', '')
-    productos = Productos.objects.filter(description__icontains=query)
-    data = list(productos.values('id', 'description', 'precioMN1'))
-    return JsonResponse(data, safe=False)
-
-def buscar_cliente(request):
-    query = request.GET.get('q', '')
-
-    if query:
-        clientes = Cliente.objects.filter(razon__icontains=query) | Cliente.objects.filter(telefono__icontains=query)
-    else:
-        clientes = Cliente.objects.none()
-
-    clientes_data = list(clientes.values('id', 'razon', 'telefono'))
-    return JsonResponse(clientes_data, safe=False)

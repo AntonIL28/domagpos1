@@ -75,17 +75,28 @@
 </div>
 
 <dialog id="modal">
-    <h3 class="head_modal">Clientes</h3>
-    <input type="text" id="buscar-cliente" placeholder="Buscar cliente...">
-    <table style="min-height: 200px;" class="table_venta" id="table_cliente">
+    <table id="tabla-clientes" class="clientes_table">
         <thead>
-            <th style="width: 60px;">Codigo</th>
-            <th style="width: 300px;">Razon</th>
-            <th style="width: 100px;">RFC</th>
+            <tr>
+                <th class="id">ID</th>
+                <th class="razon">Razon</th>
+                <th class="rfc">RFC</th>
+                <th class="name_comer">Nombre Comercial</th>
+            </tr>
         </thead>
-        <tbody></tbody>
+
+        <tbody >
+            {% for i in clientes %}
+            <tr class="product_td">
+                <td>{{i.id}}</td>
+                <td>{{i.razon}}</td>
+                <td>{{i.rfc}}</td>
+                <td>{{i.nombre_comercial}}</td>
+            </tr>
+            {% endfor %}  
+        </tbody>
     </table>
-    <br>
+
     <button id="CerrarModalCliente">Cerrar</button>
 </dialog>
 
@@ -222,6 +233,30 @@
     </table>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!--Datatable-->
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function ($) {
+       $('#tabla-clientes').DataTable({
+        "language":{
+            "decimal": ".",
+            "thousands": ",",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron coincidencias",
+        },
+        "paging": false,
+        "info": false, 
+        "lengthChange": false,
+       });
+    });
+
+    
+</script>
+
+<!--Funciones Modal-->
 <script>
     const AgregarCliente= document.querySelector("#AgregarCliente");
     const CerrarModalCliente= document.querySelector("#CerrarModalCliente");
@@ -234,50 +269,6 @@
     CerrarModalCliente.addEventListener("click",()=>{
         Modal.close();
     })
-</script>
-
-<script>
-    document.getElementById("buscar-cliente").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            buscarCliente();
-        }
-    });
-    
-    function buscarCliente() {
-        const query = document.getElementById("buscar-cliente").value;
-    
-        fetch(`/buscar_cliente/?q=` + encodeURIComponent(query))
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.querySelector("#table_cliente tbody");
-                tableBody.innerHTML = "";
-    
-                data.forEach(cliente => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td style="width: 60px; text-align: center; height: 10px;">${cliente.id}</td>
-                        <td style="width: 300px; text-align: center; height: 10px;">${cliente.razon}</td>
-                        <td style="width: 100px; text-align: center; height: 10px;">${cliente.rfc}</td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            });
-    }
-</script>
-
-<script> 
-    $(document).ready(function() {
-         $('#table_cliente tbody tr').click(function() {
-             var id = $(this).data('id'); 
-             var razon = $(this).find('td').eq(1).text(); 
-             var rfc = $(this).find('td').eq(2).text(); 
-             
-             $('#detalleId').text(id); 
-             $('#detalleNombre').text(razon); 
-             $('#detalleRFC').text(rfc); 
-        }); 
-    }); 
 </script>
 
 {% endblock content %} 
