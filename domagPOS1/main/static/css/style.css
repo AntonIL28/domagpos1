@@ -94,7 +94,6 @@ nav > ul > li:hover > ul > li:hover{
     
 }
 
-
 /*Para la cabecera*/
 .head{
     width: 100%;
@@ -581,44 +580,6 @@ footer{
     
 }
 
-/*Cliente
-.section_cliente{
-    display: grid;
-    place-items: center;
-}
-
-.sectionform_cliente{
-    display: block;
-    width: 70%;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 30px;
-}
-.general{
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-}
-
-.credito{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-content: space-around;
-    height: 60px;
-}
-
-.venta{
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-}
-
-.elemento{
-    margin-right: 20px;
-    margin-left: 20px;
-}*/ /*En pausa*/
-
 #content_form_addproductos{
     width: 1200px;
     margin-left: auto;
@@ -875,8 +836,6 @@ footer{
     margin-bottom: 30px;
     width: 58%;
 }
-
-/*Punto de venta*/
 
 /*contenedor general*/
 .flexContainer{
@@ -1136,25 +1095,74 @@ footer{
 
 
 /*MODAL*/
-#modal{
-    margin: 0 auto;
-    top: 10%;
-    padding: 20px;
-    width: 80%;
-    max-width: 800px;
+.modal-overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* Contenido del modal */
+.modal {
+    background: white;
+    width: 60%;
     height: 80%;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 8px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de cerrar */
+.close-btn {
+    background: crimson;
+    color: white;
     border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#modal::backdrop{
-    background-color: rgba(0, 0, 0, .55)
+.close-btn:hover {
+    background: darkred;
 }
 
-#estado{
-    width: 300px;
+/*Boton de agregar*/
+.add-btn {
+    background: #2200ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #1601a1;
+}
+
+/*Boton Editar*/
+.edit-btn {
+    background: #00d853;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background: #019b3c;
 }
 
 /*Espaciado de datatables y search*/
@@ -1163,6 +1171,21 @@ footer{
 }
 
 /*Datatale clientes*/
-#tabla-clientes{
-    width: 80%;
+#tabla-clientes_view_wrapper{
+    width: 100%;
+}
+
+#tabla-clientes_view{
+    width: 100%;
+    text-align: center;
+}
+
+/*Datatable productos*/
+#tabla-productos_view_wrapper{
+    width: 100%;
+}
+
+#tabla-productos_view{
+    width: 100%;
+    text-align: center;
 }

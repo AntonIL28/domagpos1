@@ -248,7 +248,7 @@
                 value="{% if precios %}{{ precios }}{% else %}'0.0000'{% endif %}">
 
         <div class="control_addp1">
-            <a href="{% url 'Productos' %}"><button type="button" id="regresar_addp">Regresar</button></a>
+            <a href="{% url 'POS2' %}"><button type="button" id="regresar_addp">Regresar</button></a>
             <button id="guardar_addp" type="submit">{% block submit_button %}Guardar{% endblock %}</button>
             {% if producto %}
                 <div>

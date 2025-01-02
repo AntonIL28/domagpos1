@@ -10,36 +10,20 @@ from django.utils import timezone
 import os
 
 def POS(request):
-    producto = Productos.objects.all()
+    productos = Productos.objects.all()
     clientes = Cliente.objects.all()
 
     return render(request, 'POScopy.html', {
         'title':'Punto de Venta',
         'clientes': clientes,
-        'producto': producto,
-    })
-
-def clientes_view(request):
-    clientes = Cliente.objects.all()
-
-    return render(request, 'clientes.html', {
-        'title':'Clientes',
-        'clientes' : clientes
-    })
-
-def productos_view(request):
-    productos = Productos.objects.all()
-
-    return render(request, 'productos.html', {
-        'title':'Productos',
-        'productos' : productos
+        'productos': productos,
     })
 
 def delete_producto_view(request, id):
     articulo = Productos.objects.get(pk=id)
     articulo.delete()
 
-    return redirect('Productos')
+    return redirect('POS2')
 
 def add_cliente_view(request, cliente_id=None):
 
@@ -108,7 +92,7 @@ def add_cliente_view(request, cliente_id=None):
                                      )
         
 
-        return redirect('Clientes')    
+        return redirect('POS2')    
 
     return render(request, 'add_cliente.html',{
         'cliente': cliente,
@@ -121,7 +105,7 @@ def delete_cliente_view(request, id):
     cliente = Cliente.objects.get(pk=id)
     cliente.delete()
 
-    return redirect('Clientes')
+    return redirect('POS2')
 
 def add_producto_view(request, producto_id=None):
 
@@ -227,7 +211,7 @@ def add_producto_view(request, producto_id=None):
                                      )
 
         
-        return redirect('Productos')    
+        return redirect('POS2')    
     
     precios = TipoCambio.objects.order_by('-id').first().tc_precios if TipoCambio.objects.exists() else None   
 

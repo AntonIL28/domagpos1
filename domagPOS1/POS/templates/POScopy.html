@@ -4,14 +4,18 @@
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-    
+    .container_control{
+        display: flex;
+        align-items: center;
+        width: 400px;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
 </style>
 
 <div class="control_POS">
-    <button id="AgregarCliente" style="background: none; border: none;">
+    <button id="openModal-clientes" style="background: none; border: none;">
         <div class="boton_POS">
             <i class="fa-solid fa-users"></i>
             <p class="pie_POS">Clientes</p>
@@ -74,31 +78,79 @@
     </div>
 </div>
 
-<dialog id="modal">
-    <table id="tabla-clientes" class="clientes_table">
-        <thead>
-            <tr>
-                <th class="id">ID</th>
-                <th class="razon">Razon</th>
-                <th class="rfc">RFC</th>
-                <th class="name_comer">Nombre Comercial</th>
-            </tr>
-        </thead>
+<div id="modal-clientes" class="modal-overlay">
+    <div class="modal">
+        <h2>Clientes</h2>
+        <br>
+        <table id="tabla-clientes_view" class="clientes_table">
+            <thead>
+                <tr>
+                    <th class="id">ID</th>
+                    <th class="razon">Razon</th>
+                    <th class="rfc">RFC</th>
+                    <th class="name_comer">Nombre Comercial</th>
+                    <th class="options">Opciones</th>
+                </tr>
+            </thead>
+    
+            <tbody >
+                {% for i in clientes %}
+                <tr class="product_td">
+                    <td>{{i.id}}</td>
+                    <td>{{i.razon}}</td>
+                    <td>{{i.rfc}}</td>
+                    <td>{{i.nombre_comercial}}</td>
+                    <td><a href="{% url 'EditCliente' i.id %}">Editar</a></td>
+                </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
 
-        <tbody >
-            {% for i in clientes %}
-            <tr class="product_td">
-                <td>{{i.id}}</td>
-                <td>{{i.razon}}</td>
-                <td>{{i.rfc}}</td>
-                <td>{{i.nombre_comercial}}</td>
-            </tr>
-            {% endfor %}  
-        </tbody>
-    </table>
+        <div class="container_control">
+            <a href="{% url 'AddCliente' %}" ><button type="submit" class="add-btn">Agregar Cliente</button></a>
+            <button class="edit-btn">Editar Cliente</button>
+            <button class="close-btn" id="closeModal-clientes">Cerrar</button>
+        </div>
+    </div>
+</div>
 
-    <button id="CerrarModalCliente">Cerrar</button>
-</dialog>
+<div id="modal-productos" class="modal-overlay">
+    <div class="modal">
+        <h2>Productos</h2>
+        <br>
+        <table id="tabla-productos_view" class="productos_table">
+            <thead>
+                <tr>
+                    <th class="id">ID</th>
+                    <th class="codigo">Código</th>
+                    <th class="description">Descripcion</th>
+                    <th class="cto_fac">Costo Factura</th>
+                    <th class="cto_int">Costo Integrado</th>
+                    <th class="options">Opciones</th>
+                </tr>
+            </thead>
+    
+            <tbody >
+                {% for producto in productos %}
+                <tr class="product_td">
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.codigo}}</td>
+                    <td>{{producto.description}}</td>
+                    <td>{{producto.Cto_Factura}}</td>
+                    <td>{{producto.Cto_Integrado}}</td>
+                    <td><a href="{% url 'EditarProducto' producto.id %}">Editar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <div class="container_control">
+            <a href="{% url 'AddProducto' %}" ><button type="submit" class="add-btn">Agregar Producto</button></a>
+            <button class="edit-btn">Editar Producto</button>
+            <button class="close-btn" id="closeModal-productos">Cerrar</button>
+        </div>
+    </div>
+</div>
 
 <div class="flexContainer">
     <div class="container_head">
@@ -174,7 +226,7 @@
                 <input type="text" class="span_scanner">
             </div>
             <div class="buscar_producto">
-                <button style="width: 100px; height: 50px;">BUSCAR PRODUCTO</button>
+                <button id="openModal-productos" style="width: 100px; height: 50px;">BUSCAR PRODUCTO</button>
             </div> 
         </div>
 
@@ -197,7 +249,6 @@
         </div>
     </div>
 </div>
-
 
 <div>
     <table class="table_venta">
@@ -240,7 +291,7 @@
 <script>
     jQuery.noConflict();
     jQuery(document).ready(function ($) {
-       $('#tabla-clientes').DataTable({
+       $('#tabla-clientes_view').DataTable({
         "language":{
             "decimal": ".",
             "thousands": ",",
@@ -251,24 +302,69 @@
         "info": false, 
         "lengthChange": false,
        });
-    });
 
-    
+       $('#tabla-productos_view').DataTable({
+        "language":{
+            "decimal": ".",
+            "thousands": ",",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron coincidencias",
+        },
+        "paging": false,
+        "info": false, 
+        "lengthChange": false,
+       });
+    }); 
 </script>
 
-<!--Funciones Modal-->
+<!--Funciones Modal Clientes-->
 <script>
-    const AgregarCliente= document.querySelector("#AgregarCliente");
-    const CerrarModalCliente= document.querySelector("#CerrarModalCliente");
-    const Modal= document.querySelector("#modal");
+    // Referencias a los elementos
+    const modalOverlay_c = document.getElementById('modal-clientes');
+    const openModalBtn_c = document.getElementById('openModal-clientes');
+    const closeModalBtn_c = document.getElementById('closeModal-clientes');
 
-    AgregarCliente.addEventListener("click",()=>{
-        Modal.showModal();
-    })
+    // Abrir el modal
+    openModalBtn_c.addEventListener('click', () => {
+        modalOverlay_c.style.display = 'flex';
+    });
 
-    CerrarModalCliente.addEventListener("click",()=>{
-        Modal.close();
-    })
+    // Cerrar el modal
+    closeModalBtn_c.addEventListener('click', () => {
+        modalOverlay_c.style.display = 'none';
+    });
+
+    // Cerrar el modal al hacer clic fuera de él
+    modalOverlay_c.addEventListener('click', (event) => {
+        if (event.target === modalOverlay_c) {
+            modalOverlay_c.style.display = 'none';
+        }
+    });
+</script>
+
+<!--Funciones Modal Productos-->
+<script>
+    // Referencias a los elementos
+    const modalOverlay_p = document.getElementById('modal-productos');
+    const openModalBtn_p = document.getElementById('openModal-productos');
+    const closeModalBtn_p = document.getElementById('closeModal-productos');
+
+    // Abrir el modal
+    openModalBtn_p.addEventListener('click', () => {
+        modalOverlay_p.style.display = 'flex';
+    });
+
+    // Cerrar el modal
+    closeModalBtn_p.addEventListener('click', () => {
+        modalOverlay_p.style.display = 'none';
+    });
+
+    // Cerrar el modal al hacer clic fuera de él
+    modalOverlay_p.addEventListener('click', (event) => {
+        if (event.target === modalOverlay_p) {
+            modalOverlay_p.style.display = 'none';
+        }
+    });
 </script>
 
 {% endblock content %} 
